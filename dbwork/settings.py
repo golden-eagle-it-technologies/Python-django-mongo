@@ -18,7 +18,7 @@ PROJECT_ROOT = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MONGODB_DATABASES = {
-    'default': {'name': 'jp'}
+    'default': {'name': 'django_mongoengine'}
 }
 
 # Quick-start development settings - unsuitable for production

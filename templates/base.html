@@ -23,10 +23,10 @@
         <nav class="navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="/post-basic-list">People Basic Listing</a>
+              <a href="/people-basic-list">People Basic Listing</a>
             </li>
             <li>
-              <a href="/post-experience-list">People Experience Listing</a>
+              <a href="/people-experience-list">People Experience Listing</a>
             </li>
             <li>
               <a href="/company-list">Company Listing</a>
@@ -55,6 +55,9 @@
           $('#myTable').DataTable({ 
             "scrollX": true, "bLengthChange": false, 
             "pageLength": 50, "bPaginate": false, "bInfo": false
+          });
+          $('.accordion-toggle').click(function(){
+            $(this).find("i").toggleClass("glyphicon-plus glyphicon-minus");
           });
         });
       </script>

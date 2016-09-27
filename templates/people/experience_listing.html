@@ -20,7 +20,7 @@
     <tbody id ="accordion" class="accordion-group">
       {% for people in peoples_list %}
         <tr>
-          <td data-toggle="collapse" data-target="#exp-{{ forloop.counter }}" class="accordion-toggle" data-parent="#accordion" style="cursor: pointer">#</td>
+          <td data-toggle="collapse" data-target="#exp-{{ forloop.counter }}" class="accordion-toggle" data-parent="#accordion" style="cursor: pointer"><i class="glyphicon glyphicon-plus"></i></td>
           <td>{{ people.linkedin_id }}</td>
           <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
           <td>{{ people.family_name }}</td>

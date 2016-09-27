@@ -13,5 +13,4 @@ urlpatterns = [
   url(r'^people-detail/(?P<people_id>\w+)$', get_people),
   url(r'^company-list/$', CompanyIndexView.as_view(), name="company_index"),
   url(r'^company-detail/(?P<company_id>\w+)$', get_company),
-  # url(r'^admin/', include(mongo_admin.site.urls)),
 ]
