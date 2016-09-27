@@ -1,0 +1,366 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  {% if people %}
+    <div>
+      <img src="{{ people.image_url }}">
+    </div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>ID</th><td>{{ people.id }}</td>
+          <th>Full Name</th><td>{{ people.full_name }}</td>
+        </tr>
+        <tr>
+          <th>Family Name</th><td>{{ people.family_name }}</td>
+          <th>Given Name</th><td><{{ people.given_name }}/td>
+        </tr>
+        <tr>
+          <th>Linkedin ID</th><td>{{ people.linkedin_id }}</td>
+          <th>URL</th><td><a href="{{ people.url }}" target="_blank">{{ people.url }}</a></td>
+        </tr>
+        <tr>
+          <th>Unique ID</th><td>{{ people.unique_id }}</td>
+          <th>Key</th><td>{{ key }}</td>
+        </tr>
+        <tr>
+          <th>Locality</th><td>{{ people.locality }}</td>
+          <th>Industry</th><td>{{ people.industry }}</td>
+        </tr>
+        <tr>
+          <th>Languages</th><td>{{ people.languages }}</td>
+          <th>Number of Connections</th><td>{{ people.num_connections }}</td>
+        </tr>
+        <tr>
+          <th>Recommendations</th><td>{{ people.recommendations }}</td>
+          <th>Canonical URL</th><td><a href="{{ people.canonical_url }}" target="_blank">{{ people.canonical_url }}</a></td>
+        </tr>
+        <tr>
+          <th>Last Visited</th><td>{{ people.last_visited }}</td>
+          <th>Updated</th><td>{{ people.updated }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Headline</th><td>{{ people.headline }}</td>
+        </tr>
+        <tr>
+          <th>Intrests</th><td>{{ people.interests }}</td>
+        </tr>
+        <tr>
+          <th>skills</th><td>{{ people.skills }}</td>
+        </tr>
+        <tr>
+          <th>Websites</th>
+            <td>
+              {% if people.websites %}
+                {% for website in people.websites %}
+                  <p>
+                    <strong>URL : </strong><a href="{{ website.url }}">{{ website.url }}</a> | 
+                    <strong>Description : </strong>{{ website.description }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Education</th>
+            <td>
+              {% if people.education %}
+                {% for edu in people.education %}
+                  <p>
+                    <strong>Name : </strong>
+                    {% if edu.profile_url %}
+                      <a href="{{ edu.profile_url }}">{{ edu.name }}</a>
+                    {% else %}
+                      {{ edu.name }}
+                    {% endif %} | 
+                    <strong>Degree : </strong>
+                    {% if edu.degrees %}
+                      {% for degree in edu.degrees %}
+                        <span>{{ degree }}</span>, 
+                      {% endfor %}
+                    {% else %}
+                      None
+                    {% endif %}<br>
+                    <strong>Start : </strong>{{ edu.start }} | <strong>End : </strong>{{ edu.end }}<br>
+                    <strong>Summary : </strong>{{ edu.summary }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Courses</th>
+            <td>
+              {% if people.courses %}
+                {% for course in people.courses %}
+                  <p>
+                    <strong>Organization : </strong>{{ course.organization }} | 
+                    <strong>Title : </strong>{{ course.title }}<br>
+                    <strong>Competencies : </strong>
+                      {% if course.competencies %}
+                        {% for comp in course.competencies %}
+                          <span>{{ comp.name }}</span>, 
+                        {% endfor %}
+                      {% else %}
+                        None
+                      {% endif %}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Test Scores</th>
+            <td>
+              {% if people.test_scores %}
+                {% for tscore in people.test_scores %}
+                  <p>
+                    <strong>Title : </strong>{{ tscore.title }}<br>
+                    <strong>Date : </strong>{{ tscore.date }} | <strong>Score : </strong>{{ tscore.score }}<br>
+                    <strong>Description : </strong>{{ tscore.description }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Projects</th>
+            <td>
+              {% if people.projects %}
+                {% for project in people.projects %}
+                  <p>
+                    <strong>Title : </strong>{{ project.title }}<br>
+                    <strong>Date : </strong>{{ project.date }} | 
+                    <strong>URL : </strong><a href="{{ project.url }}">{{ project.url }}</a><br>
+                    <strong>Description : </strong>{{ project.description }}<br>
+                    <strong>Members : </strong>
+                    {% if project.members %}
+                      {% for member in project.members %}
+                        <span>
+                          {% if member.url %}
+                            <a href="{{ member.url }}">{{ member.full_name }}</a>
+                          {% else %}
+                            {{ member.full_name }}
+                          {% endif %}
+                        </span>, 
+                      {% endfor %}
+                    {% else %}
+                      None
+                    {% endif %}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Organizations</th>
+            <td>
+              {% if people.organizations %}
+                {% for organization in people.organizations %}
+                  <p>
+                    <strong>Name : </strong>{{ organization.name }} | 
+                    <strong>Position : </strong>{{ organization.position }} | 
+                    <strong>Start : </strong>{{ organization.start }} | <strong>End : </strong>{{ organization.end }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Also viewed</th>
+            <td>
+              {% if people.also_viewed %}
+                {% for av in people.also_viewed %}
+                  <li><a href="{{ av }}">{{ av }}</a></li>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Groups</th>
+            <td>
+              {% if people.groups %}
+                {% for group in people.groups %}
+                  <div class="row">
+                    <div class="col-lg-2"><img src="{{ group.logo_url }}"></div>
+                    <div class="col-lg-10">
+                      <strong>Name : </strong>
+                      {% if group.profile_url %}
+                        <a href="{{ group.profile_url }}">{{ group.name }}</a>
+                      {% else %}
+                        {{ group.name }}
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Honors Awards</th>
+            <td>
+              {% if people.honors_awards %}
+                {% for award in people.honors_awards %}
+                  <p>
+                    <strong>Title : </strong>{{ award.title }}<br>
+                    <strong>Organization : </strong>{{ award.organization }} |
+                    <strong>Date : </strong>{{ award.date }}<br>
+                    <strong>Description : </strong>{{ award.description }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Experience</th>
+            <td>
+              {% if people.experience %}
+                {% for exp in people.experience %}
+                  <p>
+                    <strong>Title : </strong>{{ exp.title }}<br>
+                    <strong>Start : </strong>{{ exp.start }} | <strong>End : </strong>{{ exp.end }} | 
+                    <strong>Duration : </strong>{{ exp.duration }}<br>
+                    <strong>Location : </strong>{{ exp.location }}<br>
+                    <strong>Description : </strong>{{ exp.description }}<br>
+                    <strong>Organizations : </strong>
+                    {% if exp.organization %}
+                      {% for org in exp.organization %}
+                        <span>
+                          <strong>Name : </strong>
+                          {% if org.profile_url %}
+                            <a href="{{ org.profile_url }}">{{ org.name }}</a>
+                          {% else %}
+                            {{ org.name }}
+                          {% endif %} | <strong>Unique ID : </strong>{{ org.unique_id }}<br>
+                        </span>
+                      {% endfor %}
+                    {% else %}
+                      None
+                    {% endif %}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Cetrifications</th>
+            <td>
+              {% if people.certifications %}
+                {% for certification in people.certifications %}
+                  <p>
+                    <strong>Title : </strong>{{ certification.title }} | 
+                    <strong>Certificate Authority : </strong>{{ certification.certificate_authority }}<br>
+                    <strong>Start : </strong>{{ certification.start }} | <strong>End : </strong>{{ certification.end }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Publications</th>
+            <td>
+              {% if people.publications %}
+                {% for pub in people.publications %}
+                  <p>
+                    <strong>Title : </strong>{{ pub.title }} | 
+                    <strong>Publisher : </strong>{{ pub.publisher }} | 
+                    <strong>Date : </strong>{{ pub.date }}<br>
+                    <strong>Authors : </strong>
+                    {% if pub.authors %}
+                      {% for author in pub.authors %}
+                        <span>
+                          {% if author.url %}
+                            <a href="{{ author.url }}">{{ author.full_name }}</a>
+                          {% else %}
+                            {{ author.full_name }}
+                          {% endif %}
+                        </span>, 
+                      {% endfor %}
+                    {% else %}
+                      None
+                    {% endif %}<br>
+                    <strong>Summary : </strong>{{ pub.summary }}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Recommendations Preview</th>
+            <td>
+              {% if people.recommendations_preview %}
+                {% for rp in people.recommendations_preview %}
+                  <p>{{ rp }}</p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Volunteering</th>
+            <td>
+              {% if people.volunteering %}
+                {% for volu in people.volunteering %}
+                  <p>
+                    <strong>Title : </strong>{{ volu.title }} | 
+                    <strong>Cause : </strong>{{ volu.cause }}<br>
+                    <strong>Start : </strong>{{ volu.start }} | <strong>End : </strong>{{ volu.end }} | 
+                    <strong>Duration : </strong>{{ volu.duration }}<br>
+                    <strong>Description : </strong>{{ volu.description }}<br>
+                    <strong>Organization : </strong>
+                    {% if volu.organization %}
+                      {% for org in volu.organization %}
+                        <span>{{ org.name }}</span>, 
+                      {% endfor %}
+                    {% else %}
+                      None
+                    {% endif %}
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Summary</th><td>{{ people.summary }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% else %}  
+    <p>No record found</p>
+  {% endif %}
+{% endblock %}

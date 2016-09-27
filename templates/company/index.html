@@ -1,0 +1,82 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  <table class="table table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Website</th>
+        <th>LinkedIn Id</th>
+        <th>Automatically Generated</th>
+        <th>Also Viewed</th>
+        <th>Industry</th>
+        <th>Last Visited</th>
+        <th>URL</th>
+        <th>Followers</th>
+        <th>Employees On LinkedIn</th>
+        <th>Unique Id</th>
+        <th>Overview</th>
+        <th>Founded</th>
+        <th>Size</th>
+        <th>Type</th>
+        <th>Specialties</th>
+        <th>Image Url</th>
+        <th>Last Posts Timestamps</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Hq</th>
+        <th>Street 1</th>
+        <th>Postal</th>
+        <th>Country</th>
+        <th>Street 2</th>
+        <th>Affiliated Companies</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for company in companies_list %}
+        <tr>
+          <td><a href="/company-detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
+          <td><a href="{{ company.website }}">{{ company.website }}</a></td>
+          <td>{{ company.linkedin_id }}</td>
+          <td>{{ company.automatically_generated }}</td>
+          <td>
+            {% if company.also_viewed %}
+              {% for av in company.also_viewed %}
+                <li><a href="{{ av }}">{{ av }}</a></li>
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
+          </td>
+          <td>{{ company.industry }}</td>
+          <td>{{ company.last_visited }}</td>
+          <td><a href="{{ company.url }}">{{ company.url }}</a></td>
+          <td>{{ company.followers }}</td>
+          <td>{{ company.employees_on_linkedin }}</td>
+          <td>{{ company.unique_id }}</td>
+          <td>{{ company.overview }}</td>
+          <td>{{ company.founded }}</td>
+          <td>{{ company.size }}</td>
+          <td>{{ company.type }}</td>
+          <td>{{ company.specialties }}</td>
+          <td>{{ company.image_url }}</td>
+          <td>{{ company.last_posts_timestamps }}</td>
+          <td>{{ company.city }}</td>
+          <td>{{ company.state }}</td>
+          <td>{{ company.hq }}</td>
+          <td>{{ company.street_1 }}</td>
+          <td>{{ company.postal }}</td>
+          <td>{{ company.country }}</td>
+          <td>{{ company.street_2 }}</td>
+          <td>{{ company.affiliated_companies }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% bootstrap_pagination page_obj %}
+{% endblock %}

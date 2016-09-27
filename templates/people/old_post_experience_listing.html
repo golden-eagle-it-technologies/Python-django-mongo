@@ -1,0 +1,37 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  <table class="table table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th>LinkedIn Id</th>
+        <th>Full Name</th>
+        <th>Family Name</th>
+        <th>Given Name</th>
+        <th>Locality</th>
+        <th>Industry</th>
+        <th>Number of Connections</th>
+        <th>Experience</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for people in peoples_list %}
+        <tr>
+          <td>{{ people.linkedin_id }}</td>
+          <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
+          <td>{{ people.family_name }}</td>
+          <td>{{ people.given_name }}</td>
+          <td>{{ people.locality }}</td>
+          <td>{{ people.industry }}</td>
+          <td>{{ people.num_connections }}</td>
+          <td>{{ people.experience }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% bootstrap_pagination page_obj %}
+{% endblock %}

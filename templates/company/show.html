@@ -1,0 +1,98 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  {% if company %}
+    <div>
+      <img src="{{ company.image_url }}">
+    </div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Name</th><td>{{ company.name }}</td>
+          <th>Website</th><td><a href="{{ company.website }}">{{ company.website }}</a></td>
+        </tr>
+        <tr>
+          <th>Unique Id</th><td>{{ company.unique_id }}</td>
+          <th>LinkedIn Id</th><td>{{ company.linkedin_id }}</td>
+        </tr>
+        <tr>
+          <th>Industry</th><td>{{ company.industry }}</td>
+          <th>Last Visited</th><td>{{ company.last_visited }}</td>
+        </tr>
+        <tr>
+          <th>URL</th><td><a href="{{ company.url }}">{{ company.url }}</a></td>
+          <th>Followers</th><td>{{ company.followers }}</td>
+        </tr>
+        <tr>
+          <th>Automatically Generated</th><td>{{ company.automatically_generated }}</td>
+          <th>Size</th><td>{{ company.size }}</td>
+        </tr>
+        <tr>
+          <th>Founded</th><td>{{ company.founded }}</td>
+          <th>Type</th><td>{{ company.type }}</td>
+        </tr>
+        <tr>
+          <th>HQ</th><td>{{ company.hq }}</td>
+          <th>Affiliated Companies</th><td>{{ company.affiliated_companies }}</td>
+        </tr>
+        <tr>
+          <th>Street 1</th><td>{{ company.street_1 }}</td>
+          <th>Street 2</th><td>{{ company.street_2 }}</td>
+        </tr>
+        <tr>
+          <th>City</th><td>{{ company.city }}</td>
+          <th>State</th><td>{{ company.state }}</td>
+        </tr>
+        <tr>
+          <th>Postal</th><td>{{ company.postal }}</td>
+          <th>Country</th><td>{{ company.country }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Also Viewed</th>
+          <td>
+            {% if company.also_viewed %}
+              {% for av in company.also_viewed %}
+                <li><a href="{{ av }}">{{ av }}</a></li>
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th>Specialties</th><td>{{ company.specialties }}</td>
+        </tr>
+        <tr>
+          <th>Last Posts Timestamps</th><td>{{ company.last_posts_timestamps }}</td>
+        </tr>
+        <tr>
+          <th>Overview</th><td>{{ company.overview }}</td>
+        </tr>
+        <tr>
+          <th>Employees On LinkedIn</th>
+          <td>
+            {% if company.employees_on_linkedin %}
+              {% for emp in company.employees_on_linkedin %}
+                <p>
+                  <strong>URL : </strong><a href="{{ emp.url }}">{{ emp.url }}</a> | 
+                  <strong>Unique Id : </strong>{{ emp.unique_id }}
+                </p>
+              {% endfor %}
+            {% else %}
+              None
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  {% else %}  
+    <p>No record found</p>
+  {% endif %}
+{% endblock %}

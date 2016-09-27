@@ -1,0 +1,71 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  <table class="table table-bordered" style="border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>LinkedIn Id</th>
+        <th>Full Name</th>
+        <th>Family Name</th>
+        <th>Given Name</th>
+        <th>Locality</th>
+        <th>Industry</th>
+        <th>Number of Connections</th>
+      </tr>
+    </thead>
+    <tbody id ="accordion" class="accordion-group">
+      {% for people in peoples_list %}
+        <tr>
+          <td data-toggle="collapse" data-target="#exp-{{ forloop.counter }}" class="accordion-toggle" data-parent="#accordion" style="cursor: pointer">#</td>
+          <td>{{ people.linkedin_id }}</td>
+          <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
+          <td>{{ people.family_name }}</td>
+          <td>{{ people.given_name }}</td>
+          <td>{{ people.locality }}</td>
+          <td>{{ people.industry }}</td>
+          <td>{{ people.num_connections }}</td>
+        </tr>
+        <tr >
+          <td colspan="8" class="hiddenRow">
+            <div class="accordian-body collapse" id="exp-{{ forloop.counter }}">
+              {% if people.experience %}
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>Duration</th>
+                      <th>Location</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for exp in people.experience %}
+                      <tr>
+                        <td>{{ exp.title }}</td>
+                        <td>{{ exp.start }}</td>
+                        <td>{{ exp.end }}</td>
+                        <td>{{ exp.duration }}</td>
+                        <td>{{ exp.location }}</td>
+                        <td>{{ exp.description }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                None
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% bootstrap_pagination page_obj %}
+{% endblock %}

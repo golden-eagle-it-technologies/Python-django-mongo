@@ -1,0 +1,63 @@
+<!doctype html>{% load bootstrap3 %}
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>DB Work</title>
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <style>
+      .navbar-brand small { color: #999; display:block; font-size:12px; }
+      .navbar-toggle {top:10px}
+      @media (min-width:768px) { .navbar-brand { padding-top: 7px; } }
+      footer { margin-top: 40px; margin-bottom: 20px; text-align: center; color: #888; }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar navbar-inverse navbar-static-top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">MongoDB Data<small>Viewing MongoDB Data</small></a>
+        </div>
+        <nav class="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="/post-basic-list">People Basic Listing</a>
+            </li>
+            <li>
+              <a href="/post-experience-list">People Experience Listing</a>
+            </li>
+            <li>
+              <a href="/company-list">Company Listing</a>
+            </li>
+          </ul>
+          {% block top_nav %}{% endblock %}
+        </nav>
+      </div>
+    </header>
+
+    <div class="container" id="main-body">
+      <div class="row">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <p>Demo Project.</p>
+      </div>
+    </footer>
+    {% bootstrap_javascript jquery=1 %}
+    {% block js_footer %}
+      <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('#myTable').DataTable({ 
+            "scrollX": true, "bLengthChange": false, 
+            "pageLength": 50, "bPaginate": false, "bInfo": false
+          });
+        });
+      </script>
+    {% endblock %}
+  </body>
+</html>

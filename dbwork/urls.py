@@ -1,21 +1,17 @@
-"""dbwork URL Configuration
+from django.conf.urls import include, url
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.10/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url
-from django.contrib import admin
+from people.views import *
+
+from company.views import *
+
+from django_mongoengine import mongo_admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+  url(r'^$', PeopleIndexView.as_view(), name="people_index"),
+  url(r'^people-basic-list/$', PeopleBasicListingView.as_view(), name="people_basic_listing"),
+  url(r'^people-experience-list/$', PeopleExperienceListingView.as_view(), name="people_experience_listing"),
+  url(r'^people-detail/(?P<people_id>\w+)$', get_people),
+  url(r'^company-list/$', CompanyIndexView.as_view(), name="company_index"),
+  url(r'^company-detail/(?P<company_id>\w+)$', get_company),
+  # url(r'^admin/', include(mongo_admin.site.urls)),
 ]
