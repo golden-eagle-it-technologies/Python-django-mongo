@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from background_task import background
 from django.db import models
 from django.core.urlresolvers import reverse
 from django_mongoengine import fields, Document, EmbeddedDocument
