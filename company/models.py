@@ -1,14 +1,8 @@
 from __future__ import unicode_literals
-
 from django.db import models
-
 from django.core.urlresolvers import reverse
-
-from django_mongoengine import Document, EmbeddedDocument
-from django_mongoengine import fields
-import operator
-
-import datetime
+from django_mongoengine import fields, Document, EmbeddedDocument
+import operator, datetime
 
 class Company(Document):
   website = fields.StringField()
