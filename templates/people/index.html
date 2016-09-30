@@ -4,52 +4,50 @@
 {% endblock %}
 
 {% block content %}
-  <div class="col-md-7" style="margin-bottom:15px">
-    <form id="search-form" action="">
-      <div class="row">
-        <div class="col-md-1">
-          <label>Search:</label>
-        </div>        
-        <div class="col-md-4">
-          <input type="search" id="search-field" class="form-control" name="search">
+  <div class="row">
+    <div class="col-md-4">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
           <input type="hidden" id="page-no" value="1" name="page">
-        </div>        
-        <div class="col-md-2">
-          <input type="submit" class="btn btn-success" name="">
-        </div>        
-      </div>      
-    </form>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+    </div>
+    <div class="col-md-8" style="margin-top: -2%;">
+      {% bootstrap_pagination page_obj %}
+    </div>
   </div>
-  <table class="table table-bordered" id="myTable">
-    <thead>
-      <tr>
-        <th>Full Name</th>
-        <th>Image</th>
-        <th>LinkedIn Id</th>
-        <th>Unique Id</th>
-        <th>URL</th>
-        <th>Number of Connections</th>
-        <th>Locality</th>
-        <th>Last Visited</th>
-        <th>Updated</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for people in peoples_list %}
+  <div class="row">
+    <table class="table table-bordered" id="myTable" style="height:auto; max-height:100%; overflow:auto; ">
+      <thead>
         <tr>
-          <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
-          <td><img src="{{ people.image_url }}" style="width: 50%"></td>
-          <td>{{ people.linkedin_id }}</td>
-          <td>{{ people.unique_id }}</td>
-          <td><a href="{{ people.url }}">{{ people.url }}</a></td>
-          <td>{{ people.num_connections }}</td>
-          <td>{{ people.locality }}</td>
-          <td>{{ people.last_visited }}</td>
-          <td>{{ people.updated }}</td>
+          <th>Full Name</th>
+          <th>Image</th>
+          <th>LinkedIn Id</th>
+          <th>Unique Id</th>
+          <th>URL</th>
+          <th>Number of Connections</th>
+          <th>Locality</th>
+          <th>Last Visited</th>
+          <th>Updated</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  {% bootstrap_pagination page_obj %}
+      </thead>
+      <tbody>
+        {% for people in peoples_list %}
+          <tr>
+            <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
+            <td><img src="{{ people.image_url }}" style="width: 50%"></td>
+            <td>{{ people.linkedin_id }}</td>
+            <td>{{ people.unique_id }}</td>
+            <td><a href="{{ people.url }}">{{ people.url }}</a></td>
+            <td>{{ people.num_connections }}</td>
+            <td>{{ people.locality }}</td>
+            <td>{{ people.last_visited }}</td>
+            <td>{{ people.updated }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
