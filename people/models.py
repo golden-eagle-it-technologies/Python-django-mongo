@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.urlresolvers import reverse
-from django_mongoengine import fields, Document, EmbeddedDocument
+from django_mongoengine import fields, Document
 import operator, datetime
 from company.models import Company
 
@@ -43,33 +43,6 @@ class People(Document):
   _key = fields.StringField(blank=True, null=True)
   companies = fields.ListField(fields.ReferenceField(Company), default=list, blank=True, null=True)
 
-  def get_absolute_url(self):
-    return reverse('post', kwargs={"slug": self.id})
-
-  def __unicode__(self):
-    return self.linkedin_id
-
   @property
   def langs(self):
     return ', '.join(map(operator.itemgetter('name'), self.languages)) if self.languages else 'None'
-
-  @classmethod
-  def update_people_companies(clr):
-    peoples = clr.objects.all()
-    for people in peoples:
-      if people.experience and not people.companies:
-        companies_list = []
-        for experience in people.experience:
-          try:
-            for org in experience['organization']:
-              if org['unique_id']:
-                companies_list.append(str(org['unique_id']))
-          except Exception as e:
-            e
-        try:
-          people.companies = companies_list
-          people.save()
-          print people
-        except Exception as e:
-          e
-    return 'success'
