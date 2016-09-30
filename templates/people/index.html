@@ -4,6 +4,22 @@
 {% endblock %}
 
 {% block content %}
+  <div class="col-md-7" style="margin-bottom:15px">
+    <form id="search-form" action="">
+      <div class="row">
+        <div class="col-md-1">
+          <label>Search:</label>
+        </div>        
+        <div class="col-md-4">
+          <input type="search" id="search-field" class="form-control" name="search">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>        
+        <div class="col-md-2">
+          <input type="submit" class="btn btn-success" name="">
+        </div>        
+      </div>      
+    </form>
+  </div>
   <table class="table table-bordered" id="myTable">
     <thead>
       <tr>
