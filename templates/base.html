@@ -54,12 +54,44 @@
         $(document).ready(function(){
           $('#myTable').DataTable({ 
             "scrollX": true, "bLengthChange": false, 
-            "pageLength": 50, "bPaginate": false, "bInfo": false
+            "pageLength": 50, "bPaginate": false, "bInfo": false,"searching": false,
           });
           $('.accordion-toggle').click(function(){
             $(this).find("i").toggleClass("glyphicon-plus glyphicon-minus");
           });
         });
+      </script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          var getUrlParameter = function getUrlParameter(sParam) {
+          var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+          };
+            var tech = getUrlParameter('search');
+            if(tech != undefined)
+            {
+              $('#search-field').val(decodeURIComponent(tech));
+            }
+            if($('#search-field').val()!='')
+            {
+              $('.pagination').children('li').click(function(){
+                $('#page-no').val($(this).children('a').attr('href').replace('?page=',''));
+                $('#search-form').submit();
+                return false;
+              });
+            }
+          });
+       
       </script>
     {% endblock %}
   </body>
