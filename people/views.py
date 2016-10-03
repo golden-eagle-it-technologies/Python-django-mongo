@@ -58,63 +58,9 @@ class PeopleIndexView(ListView):
       
       object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
+      object_list = self.document.objects.all().order_by(sort)[:50]
     return object_list
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  # document = People
-  # queryset = People.objects.all()
-  # # context_object_name = 'peoples_list'
-  # template_name = 'people/index.html'
-  # paginate_by = 50
-
-  # # peoples_list = []
-  # def get_queryset(self,*args,**kwargs):
-  #   data = self.request.GET
-  #   # context = super(PeopleIndexView, self).get_context_data(**kwargs)
-    
-  #   paginator = Paginator(PeopleIndexView, 50)
-  #   page = self.request.GET.get('page')
-  #   try:
-  #     name = data['search']
-  #   except:
-  #     name = ''
-  #   if (name != ''):
-  #     return self.document.objects.filter(full_name__icontains = name)[:50]
-  #   else:
-  #     return self.document.objects.all()[:50]
-
-  # # def get_context_data(self,**kwargs):
-  # #   data = self.request.GET
-  # #   context = super(PeopleIndexView, self).get_context_data(**kwargs)
-    
-  # #   paginator = Paginator(PeopleIndexView, 50)
-  # #   page = self.request.GET.get('page')
-  # #   try:
-  # #       name = data['search']
-  # #   except:
-  # #       name = ''
-  # #   if (name != ''):
-  # #       context['peoples_list'] = self.document.objects.filter(full_name__icontains = name)[:50]
-  # #   else:
-  # #       context['peoples_list'] = self.document.objects.all()
-    
-  # #   context['paginator'] = paginator
-  # #   context['is_paginated'] = True
-  # #   import pdb;pdb.set_trace()
-  # #   return context
 
 
 class PeopleBasicListingView(ListView):
@@ -140,7 +86,7 @@ class PeopleBasicListingView(ListView):
       
       object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
+      object_list = self.document.objects.all().order_by(sort)[:50]
     return object_list
 
 class PeopleExperienceListingView(ListView):
@@ -166,5 +112,5 @@ class PeopleExperienceListingView(ListView):
       
       object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
+      object_list = self.document.objects.all().order_by(sort)[:50]
     return object_list
