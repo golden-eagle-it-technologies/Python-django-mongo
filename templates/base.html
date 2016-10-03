@@ -55,10 +55,10 @@
       <script type="text/javascript" src="https://silviomoreto.github.io/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
       <script type="text/javascript">
         $(document).ready(function(){
-          $('#myTable').DataTable({ 
-            "scrollX": true, "bLengthChange": false, 
-            "pageLength": 50, "bPaginate": false, "bInfo": false,"searching": false,
-          });
+          // $('#myTable').DataTable({ 
+          //   "scrollX": true, "bLengthChange": false, 
+          //   "pageLength": 50, "bPaginate": false, "bInfo": false,"searching": false,
+          // });
           $('.accordion-toggle').click(function(){
             $(this).find("i").toggleClass("glyphicon-plus glyphicon-minus");
           });
@@ -80,10 +80,20 @@
                 }
             }
           };
-            var tech = getUrlParameter('search');
-            if(tech != undefined)
+            var search = getUrlParameter('search');
+            var sort = getUrlParameter('sort');
+            var filter = getUrlParameter('filter');
+            if(search != undefined)
             {
-              $('#search-field').val(decodeURIComponent(tech));
+              $('#search-field').val(decodeURIComponent(search.replace('+',' ')));
+            }
+            if(sort != undefined)
+            {
+              $('#sortBy').val(decodeURIComponent(sort));
+            }
+            if(filter != undefined)
+            {
+              $('#filterBy').val(decodeURIComponent(filter));
             }
             if($('#search-field').val()!='')
             {

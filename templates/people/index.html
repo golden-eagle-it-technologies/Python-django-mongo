@@ -5,13 +5,24 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <form class="form-inline" id="search-form" action="">
         <div class="form-group">
-          <select class="selectpicker" name="filter">
-            <option value="family_name">Family Name</option>
+          <label>Sort By</label>
+          <select class="selectpicker" id="sortBy" name="sort">
             <option value="full_name" selected>Full Name</option>
-            <option value="given_name">Given Name</option>
+            <option value="linkedin_id">LinkedIn Id</option>
+            <option value="locality">Locality</option>
+            <option value="unique_id">Unique Id</option>
+            <option value="num_connections">No. of Connections</option>
+            <option value="last_visited">Last Visited</option>
+            <option value="updated">Updated</option>
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="selectpicker" id="filterBy" name="filter">
+            <option value="full_name" selected>Full Name</option>
             <option value="linkedin_id">LinkedIn Id</option>
             <option value="locality">Locality</option>
             <option value="unique_id">Unique Id</option>
@@ -21,10 +32,13 @@
           <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
           <input type="hidden" id="page-no" value="1" name="page">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
       </form>
     </div>
-    <div class="col-md-6" style="margin-top: -2%;">
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       {% bootstrap_pagination page_obj %}
     </div>
   </div>

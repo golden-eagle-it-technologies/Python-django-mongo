@@ -42,16 +42,23 @@ class PeopleIndexView(ListView):
   paginate_by = 50
 
   def get_queryset(self):
-    # import pdb; pdb.set_trace()
     data = self.request.GET
+    
+    try:
+      sort = data['sort']
+    except:
+      sort = 'full_name'
     try:
       name = data['search']
     except:
       name = ''
     if (name != ''):
-      object_list = self.document.objects.filter(full_name__icontains = name)[:50]
+      field = data['filter']
+      field = field + '__icontains'
+      
+      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all()[:50]
+      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
     return object_list
 
 
@@ -117,16 +124,23 @@ class PeopleBasicListingView(ListView):
   paginate_by = 50
 
   def get_queryset(self):
-    # import pdb; pdb.set_trace()
     data = self.request.GET
+    
+    try:
+      sort = data['sort']
+    except:
+      sort = 'full_name'
     try:
       name = data['search']
     except:
       name = ''
     if (name != ''):
-      object_list = self.document.objects.filter(full_name__icontains = name)[:50]
+      field = data['filter']
+      field = field + '__icontains'
+      
+      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all()[:50]
+      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
     return object_list
 
 class PeopleExperienceListingView(ListView):
@@ -136,14 +150,21 @@ class PeopleExperienceListingView(ListView):
   paginate_by = 50
 
   def get_queryset(self):
-    # import pdb; pdb.set_trace()
     data = self.request.GET
+    
+    try:
+      sort = data['sort']
+    except:
+      sort = 'full_name'
     try:
       name = data['search']
     except:
       name = ''
     if (name != ''):
-      object_list = self.document.objects.filter(full_name__icontains = name)[:50]
+      field = data['filter']
+      field = field + '__icontains'
+      
+      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
     else:
-      object_list = self.document.objects.all()[:50]
+      object_list = self.document.objects.all().order_by('linkedin_id')[:50]
     return object_list
