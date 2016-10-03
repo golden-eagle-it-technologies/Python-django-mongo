@@ -6,7 +6,7 @@
 {% block content %}
   {% if people %}
     <div>
-      <img src="{{ people.image_url }}">
+      <img src="{{ people.image_url|default:'#' }}">
     </div>
     <table class="table table-bordered">
       <tbody>

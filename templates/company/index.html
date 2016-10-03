@@ -8,6 +8,7 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>Image</th>
         <th>Website</th>
         <th>LinkedIn Id</th>
         <th>Automatically Generated</th>
@@ -23,7 +24,6 @@
         <th>Size</th>
         <th>Type</th>
         <th>Specialties</th>
-        <th>Image Url</th>
         <th>Last Posts Timestamps</th>
         <th>City</th>
         <th>State</th>
@@ -39,6 +39,7 @@
       {% for company in companies_list %}
         <tr>
           <td><a href="/company-detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
+          <td><img src="{{ company.image_url|default:'#' }}" style=""></td>
           <td><a href="{{ company.website }}">{{ company.website }}</a></td>
           <td>{{ company.linkedin_id }}</td>
           <td>{{ company.automatically_generated }}</td>
@@ -62,7 +63,6 @@
           <td>{{ company.size }}</td>
           <td>{{ company.type }}</td>
           <td>{{ company.specialties }}</td>
-          <td>{{ company.image_url }}</td>
           <td>{{ company.last_posts_timestamps }}</td>
           <td>{{ company.city }}</td>
           <td>{{ company.state }}</td>

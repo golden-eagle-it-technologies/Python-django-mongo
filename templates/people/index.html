@@ -61,7 +61,7 @@
         {% for people in peoples_list %}
           <tr>
             <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
-            <td><img src="{{ people.image_url }}" style="width: 50%"></td>
+            <td><img src="{{ people.image_url|default:'#' }}" style="width: 50%"></td>
             <td>{{ people.linkedin_id }}</td>
             <td>{{ people.unique_id }}</td>
             <td><a href="{{ people.url }}">{{ people.url }}</a></td>

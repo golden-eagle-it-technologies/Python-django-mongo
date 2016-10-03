@@ -6,7 +6,7 @@
 {% block content %}
   {% if company %}
     <div>
-      <img src="{{ company.image_url }}">
+      <img src="{{ company.image_url|default:'#' }}">
     </div>
     <table class="table table-bordered">
       <tbody>

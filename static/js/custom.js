@@ -1,8 +1,8 @@
 $(document).ready(function(){
-  // $('#myTable').DataTable({ 
-  //   "scrollX": true, "bLengthChange": false, 
-  //   "pageLength": 50, "bPaginate": false, "bInfo": false,"searching": false,
-  // });
+  $('#myTable').DataTable({ 
+    "scrollX": true, "bLengthChange": false, "aaSorting": [], 
+    "pageLength": 50, "bPaginate": false, "bInfo": false,"searching": false,
+  });
   $('.accordion-toggle').click(function(){
     $(this).find("i").toggleClass("glyphicon-plus glyphicon-minus");
   });
