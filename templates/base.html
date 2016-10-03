@@ -6,6 +6,7 @@
 
     {% bootstrap_css %}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://silviomoreto.github.io/bootstrap-select/dist/css/bootstrap-select.min.css">
     <style>
       .navbar-brand small { color: #999; display:block; font-size:12px; }
       .navbar-toggle {top:10px}
@@ -51,6 +52,7 @@
     {% bootstrap_javascript jquery=1 %}
     {% block js_footer %}
       <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="https://silviomoreto.github.io/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
       <script type="text/javascript">
         $(document).ready(function(){
           $('#myTable').DataTable({ 
