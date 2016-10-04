@@ -14,6 +14,26 @@ class CompanyIndexView(ListView):
   context_object_name = 'companies_list'
   paginate_by = 50
 
+  def get_queryset(self):
+    data = self.request.GET
+    
+    try:
+      sort = data['sort']
+    except:
+      sort = 'name'
+    try:
+      name = data['search']
+    except:
+      name = ''
+    if (name != ''):
+      field = data['filter']
+      field = field + '__icontains'
+      
+      object_list = self.document.objects(**{field : name}).order_by(sort)
+    else:
+      object_list = self.document.objects.order_by(sort)
+    return object_list
+
 
 def get_company(request, company_id=None):
   if company_id:
