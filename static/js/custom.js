@@ -37,7 +37,7 @@ $(document).ready(function(){
   {
     $('#filterBy').val(decodeURIComponent(filter));
   }
-  if($('#search-field').val()!='')
+  if($('#search-field').val()!='' || filter != undefined)
   {
     $('.pagination').children('li').click(function(){
       $('#page-no').val($(this).children('a').attr('href').replace('?page=',''));

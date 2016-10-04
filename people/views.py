@@ -56,9 +56,9 @@ class PeopleIndexView(ListView):
       field = data['filter']
       field = field + '__icontains'
       
-      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
+      object_list = self.document.objects(**{field : name}).order_by(sort)
     else:
-      object_list = self.document.objects.all().order_by(sort)[:50]
+      object_list = self.document.objects.order_by(sort)
     return object_list
 
 
@@ -84,9 +84,9 @@ class PeopleBasicListingView(ListView):
       field = data['filter']
       field = field + '__icontains'
       
-      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
+      object_list = self.document.objects(**{field : name}).order_by(sort)
     else:
-      object_list = self.document.objects.all().order_by(sort)[:50]
+      object_list = self.document.objects.order_by(sort)
     return object_list
 
 class PeopleExperienceListingView(ListView):
@@ -110,7 +110,7 @@ class PeopleExperienceListingView(ListView):
       field = data['filter']
       field = field + '__icontains'
       
-      object_list = self.document.objects.filter(**{field : name}).order_by(sort)[:50]
+      object_list = self.document.objects(**{field : name}).order_by(sort)
     else:
-      object_list = self.document.objects.all().order_by(sort)[:50]
+      object_list = self.document.objects.order_by(sort)
     return object_list

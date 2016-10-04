@@ -47,6 +47,8 @@
       <thead>
         <tr>
           <th>Full Name</th>
+          <th>Family Name</th>
+          <th>Given Name</th>
           <th>Image</th>
           <th>LinkedIn Id</th>
           <th>Unique Id</th>
@@ -61,6 +63,8 @@
         {% for people in peoples_list %}
           <tr>
             <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
+            <td>{{ people.family_name }}</td>
+            <td>{{ people.given_name }}</td>
             <td><img src="{{ people.image_url|default:'#' }}" style="width: 50%"></td>
             <td>{{ people.linkedin_id }}</td>
             <td>{{ people.unique_id }}</td>
