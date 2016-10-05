@@ -95,3 +95,29 @@ class People(Document):
     except:
       temp = None
     return temp
+
+  @property
+  def totalExperience(self):
+    duration = 0
+    for experience in self.experiences:
+      if experience.start and experience.end:
+        months = (experience.end - experience.start).days / 30
+      elif experience.start and not experience.end:
+        months = (datetime.now() - experience.start).days / 30
+      else:
+        months = 0
+      duration += months
+    years = duration / 12
+    months = duration % 12
+    if years and months:
+      total = str(years) + ' year(s) ' + str(months) + ' month(s)'
+    elif years:
+      total = str(years) + ' year(s)'
+    elif months:
+      total = str(months) + ' month(s)'
+    else:
+      total = '0 month'
+
+    return total
+
+  
