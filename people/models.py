@@ -45,4 +45,8 @@ class People(Document):
 
   @property
   def langs(self):
-    return ', '.join(map(operator.itemgetter('name'), self.languages)) if self.languages else 'None'
+    try:
+      temp = ', '.join(map(operator.itemgetter('name'), self.languages)) if self.languages else 'None'
+    except:
+      temp = None
+    return temp
