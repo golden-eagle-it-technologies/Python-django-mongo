@@ -2,6 +2,7 @@ import os
 from django.core.management.base import BaseCommand, CommandError
 from datetime import datetime
 from people.models import People
+from company.models import Company
 
 class Command(BaseCommand):
   help = 'Read company details from peoples experience list and create relations between Company and People record.'
@@ -9,12 +10,16 @@ class Command(BaseCommand):
   def handle(self, *args, **options):
     try:
       peoples = People.objects.all()
+      
       time_now = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
       os.system("echo Task start at : %s >> processed_people_data.log" %(time_now))
       os.system("echo Task start at : %s >> failer_people_data.log" %(time_now))
+      
       for people in peoples:
+      
         if people.experience and not people.companies:
           companies_list = []
+      
           for experience in people.experience:
             try:
               for org in experience['organization']:
@@ -22,13 +27,17 @@ class Command(BaseCommand):
                   companies_list.append(str(org['unique_id']))
             except Exception as e:
               e
-          try:
-            people.companies = companies_list
-            people.save()
-            os.system("echo %s >> processed_people_data.log" %(people.id))
-            print people.id
-          except Exception as e:
-            os.system("echo %s >> failer_people_data.log" %(people.id))
+      
+          if len(companies_list) > 0:
+            try:
+              companies = Company.objects(unique_id__in=companies_list)
+              people.companies = companies_list
+              people.save()
+              os.system("echo %s >> processed_people_data.log" %(people.id))
+              print people.id
+            except Exception as e:
+              os.system("echo %s >> failer_people_data.log" %(people.id))
+      
       self.stdout.write('Successfully created relations between companies and peoples records.')
     except Exception as e:
       print e
