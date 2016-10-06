@@ -6,8 +6,8 @@ from django.core.paginator import Paginator
 from django_mongoengine.forms.fields import DictField
 # from django_mongoengine.views import ListView, DetailView
 from django.views.generic.list import ListView
-
-from people.models import People
+import datetime
+from people.models import People,Experience
 
 def get_people(request, people_id=None):
   if people_id:
@@ -114,3 +114,41 @@ class PeopleExperienceListingView(ListView):
     else:
       object_list = self.document.objects.order_by(sort)
     return object_list
+
+class PeopleCurrentExperiencesView(ListView):
+  document = People
+  template_name = 'people/current_experience.html'
+  context_object_name = 'peoples_list'
+  paginate_by = 50
+
+  def get_queryset(self):
+    exps = Experience.objects(end=None)
+    # data = self.request.GET
+    
+    # try:
+    #   sort = data['sort']
+    # except:
+    #   sort = 'full_name'
+    # try:
+    #   name = data['search']
+    # except:
+    #   name = ''
+    # if (name != ''):
+    #   field = data['filter']
+    #   field = field + '__icontains'
+    #   peoples = self.document.objects(experiences__in=exps,**{field : name}).order_by(sort)
+    # else:
+    #   peoples = self.document.objects(experiences__in=exps,).order_by(sort)
+    peoples = self.document.objects(experiences__in=exps)
+    people_array = []
+    mindate = datetime.datetime(datetime.MINYEAR, 1, 1)
+    for people in peoples:
+      people.experiences = sorted(people.experiences, key=lambda x: x.start or mindate, reverse=True)
+      people.exp = people.experiences[0]
+      if people.exp.organization:
+        people.c_industry = people.exp.organization.industry
+      else:
+        people.c_industry = 'Not Found'
+      if people.exp.start is not None:
+        people_array.append(people)
+    return people_array

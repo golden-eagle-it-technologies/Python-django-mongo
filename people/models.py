@@ -47,6 +47,11 @@ class Experience(Document):
 
     super(Experience, self).save()
     return self
+  
+  @property
+  def startDate(self):
+    return MONTHS[self.start.month-1] + ' ' + str(self.start.year)
+  
 
 
 class People(Document):
@@ -119,5 +124,6 @@ class People(Document):
       total = '0 month'
 
     return total
+
 
   
