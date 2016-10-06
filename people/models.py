@@ -5,6 +5,7 @@ from django_mongoengine import fields, Document
 from datetime import datetime, date
 import operator
 from company.models import Company
+from industries.models import Industry
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -87,6 +88,7 @@ class People(Document):
   _key = fields.StringField(blank=True, null=True)
   companies = fields.ListField(fields.ReferenceField(Company), default=list, blank=True, null=True)
   experiences = fields.ListField(fields.ReferenceField(Experience), default=list, blank=True, null=True)
+  industry_ref = fields.ReferenceField(Industry, blank=True, null=True)
 
   @property
   def langs(self):
