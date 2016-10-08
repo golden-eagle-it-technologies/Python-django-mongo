@@ -6,7 +6,7 @@ PROJECT_ROOT = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MONGODB_DATABASES = {
-  'default': {'name': 'django_mongoengine'}
+  'default': {'name': 'dbwork'}
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -34,9 +34,11 @@ INSTALLED_APPS = [
   
   'bootstrap3',
 
-  'people',
-  'company',
+  'company_dump',
+  'people_dump',
   'industries',
+  'companies',
+  'users',
 ]
 
 MIDDLEWARE = [
