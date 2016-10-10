@@ -1,46 +1,46 @@
-{% extends "base.html" %}{% load bootstrap3 %}
+{% extensds "base.html" %}{% load bootstrap3 %}
 
 {% block top_nav %}
 {% endblock %}
 
 {% block content %}
-  {% if people %}
+  {% if user %}
     <div>
-      <img src="{{ people.image_url|default:'#' }}">
+      <img src="{{ user.image_url|default:'#' }}">
     </div>
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th>ID</th><td>{{ people.id }}</td>
-          <th>Full Name</th><td>{{ people.full_name }}</td>
+          <th>ID</th><td>{{ user.id }}</td>
+          <th>Full Name</th><td>{{ user.full_name }}</td>
         </tr>
         <tr>
-          <th>Family Name</th><td>{{ people.family_name }}</td>
-          <th>Given Name</th><td>{{ people.given_name }}</td>
+          <th>Family Name</th><td>{{ user.family_name }}</td>
+          <th>Given Name</th><td>{{ user.given_name }}</td>
         </tr>
         <tr>
-          <th>Linkedin ID</th><td>{{ people.linkedin_id }}</td>
-          <th>URL</th><td><a href="{{ people.url }}" target="_blank">{{ people.url }}</a></td>
+          <th>Linkedin ID</th><td>{{ user.linkedin_id }}</td>
+          <th>URL</th><td><a href="{{ user.url }}" target="_blank">{{ user.url }}</a></td>
         </tr>
         <tr>
-          <th>Unique ID</th><td>{{ people.unique_id }}</td>
+          <th>Unique ID</th><td>{{ user.unique_id }}</td>
           <th>Key</th><td>{{ key }}</td>
         </tr>
         <tr>
-          <th>Locality</th><td>{{ people.locality }}</td>
-          <th>Industry</th><td>{{ people.industry }}</td>
+          <th>Locality</th><td>{{ user.locality }}</td>
+          <th>Industry</th><td>{{ user.industry }}</td>
         </tr>
         <tr>
-          <th>Languages</th><td>{{ people.languages }}</td>
-          <th>Number of Connections</th><td>{{ people.num_connections }}</td>
+          <th>Languages</th><td>{{ user.languages }}</td>
+          <th>Number of Connections</th><td>{{ user.num_connections }}</td>
         </tr>
         <tr>
-          <th>Recommendations</th><td>{{ people.recommendations }}</td>
-          <th>Canonical URL</th><td><a href="{{ people.canonical_url }}" target="_blank">{{ people.canonical_url }}</a></td>
+          <th>Recommendations</th><td>{{ user.recommendations }}</td>
+          <th>Canonical URL</th><td><a href="{{ user.canonical_url }}" target="_blank">{{ user.canonical_url }}</a></td>
         </tr>
         <tr>
-          <th>Last Visited</th><td>{{ people.last_visited }}</td>
-          <th>Updated</th><td>{{ people.updated }}</td>
+          <th>Last Visited</th><td>{{ user.last_visited }}</td>
+          <th>Updated</th><td>{{ user.updated }}</td>
         </tr>
       </tbody>
     </table>
@@ -48,19 +48,19 @@
     <table class="table table-bordered">
       <tbody>
         <tr>
-          <th>Headline</th><td>{{ people.headline }}</td>
+          <th>Headline</th><td>{{ user.headline }}</td>
         </tr>
         <tr>
-          <th>Intrests</th><td>{{ people.interests }}</td>
+          <th>Intrests</th><td>{{ user.interests }}</td>
         </tr>
         <tr>
-          <th>skills</th><td>{{ people.skills }}</td>
+          <th>skills</th><td>{{ user.skills }}</td>
         </tr>
         <tr>
           <th>Websites</th>
             <td>
-              {% if people.websites %}
-                {% for website in people.websites %}
+              {% if user.websites %}
+                {% for website in user.websites %}
                   <p>
                     <strong>URL : </strong><a href="{{ website.url }}">{{ website.url }}</a> | 
                     <strong>Description : </strong>{{ website.description }}
@@ -74,8 +74,8 @@
         <tr>
           <th>Education</th>
             <td>
-              {% if people.education %}
-                {% for edu in people.education %}
+              {% if user.education %}
+                {% for edu in user.education %}
                   <p>
                     <strong>Name : </strong>
                     {% if edu.profile_url %}
@@ -103,8 +103,8 @@
         <tr>
           <th>Courses</th>
             <td>
-              {% if people.courses %}
-                {% for course in people.courses %}
+              {% if user.courses %}
+                {% for course in user.courses %}
                   <p>
                     <strong>Organization : </strong>{{ course.organization }} | 
                     <strong>Title : </strong>{{ course.title }}<br>
@@ -126,8 +126,8 @@
         <tr>
           <th>Test Scores</th>
             <td>
-              {% if people.test_scores %}
-                {% for tscore in people.test_scores %}
+              {% if user.test_scores %}
+                {% for tscore in user.test_scores %}
                   <p>
                     <strong>Title : </strong>{{ tscore.title }}<br>
                     <strong>Date : </strong>{{ tscore.date }} | <strong>Score : </strong>{{ tscore.score }}<br>
@@ -142,8 +142,8 @@
         <tr>
           <th>Projects</th>
             <td>
-              {% if people.projects %}
-                {% for project in people.projects %}
+              {% if user.projects %}
+                {% for project in user.projects %}
                   <p>
                     <strong>Title : </strong>{{ project.title }}<br>
                     <strong>Date : </strong>{{ project.date }} | 
@@ -173,8 +173,8 @@
         <tr>
           <th>Organizations</th>
             <td>
-              {% if people.organizations %}
-                {% for organization in people.organizations %}
+              {% if user.organizations %}
+                {% for organization in user.organizations %}
                   <p>
                     <strong>Name : </strong>{{ organization.name }} | 
                     <strong>Position : </strong>{{ organization.position }} | 
@@ -189,8 +189,8 @@
         <tr>
           <th>Also viewed</th>
             <td>
-              {% if people.also_viewed %}
-                {% for av in people.also_viewed %}
+              {% if user.also_viewed %}
+                {% for av in user.also_viewed %}
                   <li><a href="{{ av }}">{{ av }}</a></li>
                 {% endfor %}
               {% else %}
@@ -201,8 +201,8 @@
         <tr>
           <th>Groups</th>
             <td>
-              {% if people.groups %}
-                {% for group in people.groups %}
+              {% if user.groups %}
+                {% for group in user.groups %}
                   <div class="row">
                     <div class="col-lg-2"><img src="{{ group.logo_url }}"></div>
                     <div class="col-lg-10">
@@ -223,8 +223,8 @@
         <tr>
           <th>Honors Awards</th>
             <td>
-              {% if people.honors_awards %}
-                {% for award in people.honors_awards %}
+              {% if user.honors_awards %}
+                {% for award in user.honors_awards %}
                   <p>
                     <strong>Title : </strong>{{ award.title }}<br>
                     <strong>Organization : </strong>{{ award.organization }} |
@@ -240,8 +240,8 @@
         <tr>
           <th>Experience</th>
             <td>
-              {% if people.experience %}
-                {% for exp in people.experience %}
+              {% if user.experience %}
+                {% for exp in user.experience %}
                   <p>
                     <strong>Title : </strong>{{ exp.title }}<br>
                     <strong>Start : </strong>{{ exp.start }} | <strong>End : </strong>{{ exp.end }} | 
@@ -273,8 +273,8 @@
         <tr>
           <th>Cetrifications</th>
             <td>
-              {% if people.certifications %}
-                {% for certification in people.certifications %}
+              {% if user.certifications %}
+                {% for certification in user.certifications %}
                   <p>
                     <strong>Title : </strong>{{ certification.title }} | 
                     <strong>Certificate Authority : </strong>{{ certification.certificate_authority }}<br>
@@ -289,8 +289,8 @@
         <tr>
           <th>Publications</th>
             <td>
-              {% if people.publications %}
-                {% for pub in people.publications %}
+              {% if user.publications %}
+                {% for pub in user.publications %}
                   <p>
                     <strong>Title : </strong>{{ pub.title }} | 
                     <strong>Publisher : </strong>{{ pub.publisher }} | 
@@ -320,8 +320,8 @@
         <tr>
           <th>Recommendations Preview</th>
             <td>
-              {% if people.recommendations_preview %}
-                {% for rp in people.recommendations_preview %}
+              {% if user.recommendations_preview %}
+                {% for rp in user.recommendations_preview %}
                   <p>{{ rp }}</p>
                 {% endfor %}
               {% else %}
@@ -332,8 +332,8 @@
         <tr>
           <th>Volunteering</th>
             <td>
-              {% if people.volunteering %}
-                {% for volu in people.volunteering %}
+              {% if user.volunteering %}
+                {% for volu in user.volunteering %}
                   <p>
                     <strong>Title : </strong>{{ volu.title }} | 
                     <strong>Cause : </strong>{{ volu.cause }}<br>
@@ -356,7 +356,7 @@
             </td>
         </tr>
         <tr>
-          <th>Summary</th><td>{{ people.summary }}</td>
+          <th>Summary</th><td>{{ user.summary }}</td>
         </tr>
       </tbody>
     </table>

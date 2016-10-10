@@ -4,13 +4,15 @@
 {% endblock %}
 
 {% block content %}
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-12">
       <form class="form-inline" id="search-form" action="">
         <div class="form-group">
           <label>Sort By</label>
           <select class="selectpicker" id="sortBy" name="sort">
             <option value="full_name" selected>Full Name</option>
+            <option value="family_name">Family Name</option>
+            <option value="given_name">Given Name</option>
             <option value="linkedin_id">LinkedIn Id</option>
             <option value="locality">Locality</option>
             <option value="unique_id">Unique Id</option>
@@ -23,6 +25,8 @@
         <div class="form-group">
           <select class="selectpicker" id="filterBy" name="filter">
             <option value="full_name" selected>Full Name</option>
+            <option value="family_name">Family Name</option>
+            <option value="given_name">Given Name</option>
             <option value="linkedin_id">LinkedIn Id</option>
             <option value="locality">Locality</option>
             <option value="unique_id">Unique Id</option>
@@ -35,7 +39,7 @@
         <button type="submit" class="btn btn-primary">Filter</button>
       </form>
     </div>
-  </div> -->
+  </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -43,30 +47,38 @@
     </div>
   </div>
   <div class="row">
-    <table class="table table-bordered" id="myTable" style="height:auto; max-height:100%; overflow:auto; ">
+    <table class="table table-bordered" id="myTable">
       <thead>
         <tr>
+          <th>Last Visited</th>
           <th>LinkedIn Id</th>
           <th>Full Name</th>
-          <th>Current Job Title</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>User Industry</th>
-          <th>Company Industry</th>
-          <th>LinkedIn Title</th>
+          <th>Family Name</th>
+          <th>Given Name</th>
+          <th>Image</th>
+          <th>Languages</th>
+          <th>Locality</th>
+          <th>Industry</th>
+          <th>Number of Connections</th>
+          <th>Recommendations</th>
+          <th>Canonical URL</th>
         </tr>
       </thead>
       <tbody>
-        {% for people in peoples_list %}
+        {% for user in users_list %}
           <tr>
-            <td>{{ people.linkedin_id }}</td>
-            <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
-            <td>{{ people.exp.title }}</td>
-            <td>{{ people.exp.startDate }}</td>
-            <td>Present</td>
-            <td>{{ people.industry }}</td>
-            <td>{{ people.c_industry }}</td>
-            <td>{{ people.headline }}</td>
+            <td>{{ user.last_visited }}</td>
+            <td>{{ user.linkedin_id }}</td>
+            <td><strong><a href="/user-detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+            <td>{{ user.family_name }}</td>
+            <td>{{ user.given_name }}</td>
+            <td><img src="{{ user.image_url|default:'#' }}" style="width: 50%"></td>
+            <td>{{ user.langs }}</td>
+            <td>{{ user.locality }}</td>
+            <td>{{ user.industry }}</td>
+            <td>{{ user.num_connections }}</td>
+            <td>{{ user.recommendations }}</td>
+            <td><a href="{{ user.canonical_url }}">{{ user.canonical_url }}</a></td>
           </tr>
         {% endfor %}
       </tbody>

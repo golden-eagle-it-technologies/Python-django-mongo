@@ -60,21 +60,21 @@
         </tr>
       </thead>
       <tbody id ="accordion" class="accordion-group">
-        {% for people in peoples_list %}
+        {% for user in users_list %}
           <tr>
             <td data-toggle="collapse" data-target="#exp-{{ forloop.counter }}" class="accordion-toggle" data-parent="#accordion" style="cursor: pointer"><i class="glyphicon glyphicon-plus"></i></td>
-            <td>{{ people.linkedin_id }}</td>
-            <td><strong><a href="/people-detail/{{ people.id }}" target="_blank">{{ people.full_name}}</a></strong></td>
-            <td>{{ people.family_name }}</td>
-            <td>{{ people.given_name }}</td>
-            <td>{{ people.locality }}</td>
-            <td>{{ people.industry }}</td>
-            <td>{{ people.num_connections }}</td>
+            <td>{{ user.linkedin_id }}</td>
+            <td><strong><a href="/user-detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+            <td>{{ user.family_name }}</td>
+            <td>{{ user.given_name }}</td>
+            <td>{{ user.locality }}</td>
+            <td>{{ user.industry }}</td>
+            <td>{{ user.num_connections }}</td>
           </tr>
           <tr >
             <td colspan="8" class="hiddenRow">
               <div class="accordian-body collapse" id="exp-{{ forloop.counter }}">
-                {% if people.experience %}
+                {% if user.experience %}
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -87,7 +87,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for exp in people.experience %}
+                      {% for exp in user.experience %}
                         <tr>
                           <td>{{ exp.title }}</td>
                           <td>{{ exp.start }}</td>
