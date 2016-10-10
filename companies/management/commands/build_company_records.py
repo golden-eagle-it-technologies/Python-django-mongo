@@ -17,15 +17,17 @@ class Command(BaseCommand):
       company_fields = Company.fields_list()
       company_dump = CompanyDump.objects.all()
       cdump_count = company_dump.count()
+      industries = Industry.objects.all()
 
       time_now = datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S")
       os.system("echo Task start at : %s >> processed_company_data.log" %(time_now))
       os.system("echo Task start at : %s >> failer_company_data.log" %(time_now))
 
-      with click.progressbar(range(cdump_count)) as bar:
-        for cdump, i in itertools.izip(company_dump, bar):
+      # with click.progressbar(range(cdump_count)) as bar:
+        # for cdump, i in itertools.izip(company_dump, bar):
+        for cdump in company_dump:
 
-          if not Company.objects(unique_id=cdump.unique_id):
+          # if not Company.objects(unique_id=cdump.unique_id):
             try:
               company = {}
               for item in company_fields:
@@ -38,7 +40,7 @@ class Command(BaseCommand):
                   elif item in ['updated', 'last_visited']:
                     company[item] = datetime.strptime(cdump[item].replace('T',' '), '%Y-%m-%d %H:%M:%S')
                   elif item == 'industry':
-                    industry = Industry.objects.filter(name=cdump[item].lower())
+                    industry = industries.filter(name=cdump[item].lower())
                     company[item] = industry[0] if industry else None
                   else:
                     company[item] = cdump[item]
@@ -53,4 +55,5 @@ class Command(BaseCommand):
       self.stdout.write('Successfully build company records.')
     except Exception as e:
       print e
+      os.system("echo error : %s >> failer_company_data.log" %(e))
       self.stdout.write('Something went wrong, operation terminated.')
