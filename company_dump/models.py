@@ -34,3 +34,5 @@ class CompanyDump(Document):
   country = StringField(blank=True, null=True)
   street_2 = StringField(blank=True, null=True)
   affiliated_companies = StringField(blank=True, null=True)
+
+  meta = {"collection": "company"}

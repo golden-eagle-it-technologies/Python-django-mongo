@@ -6,7 +6,8 @@ PROJECT_ROOT = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MONGODB_DATABASES = {
-  'default': {'name': 'dbwork'}
+  # 'default': {'name': 'dbwork'}
+  'default': {'name': 'ftlcopy', 'host': '54.179.147.193', 'port': 27017}
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!
