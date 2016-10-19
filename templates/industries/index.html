@@ -1,0 +1,60 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <label>Sort By</label>
+          <select class="form-control inputstl" id="sortBy" name="sort">
+            <option value="name" selected>Name</option>
+            <option value="number_companies">Number of Companies</option>
+            <option value="number_users">Number of Users</option>
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="form-control inputstl" id="filterBy" name="filter">
+            <option value="name" selected>Name</option>
+            <option value="number_companies">Number of Companies</option>
+            <option value="number_users">Number of Users</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Companies</th>
+        <th>Number of Users</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for industry in industries %}
+        <tr>
+          <td><a href="#" target="_blank">{{ industry.name|title }}</a></td>
+          <td>{{ industry.number_companies }}</td>
+          <td>{{ industry.number_users }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
