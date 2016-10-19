@@ -17,14 +17,40 @@
         </div>
         <nav class="navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="/people-basic-list">People Basic Listing</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Raw Data <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'people_data_index' %}">Users Listing</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'company_data_index' %}">Companies Listing</a></li>
+              </ul>
             </li>
-            <li>
-              <a href="/people-experience-list">People Experience Listing</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'users_index' %}">Listing</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'users_basic' %}">Basic Listing</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'users_experience' %}">Experience Listing</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'users_current_experience' %}">Current Experience Listing</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{% url 'users_improper_data' %}">Improper Data Listing</a></li>
+              </ul>
             </li>
-            <li>
-              <a href="/company-list">Company Listing</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Company <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'company_index' %}">Listing</a></li>
+                <li><a href="{% url 'company_improper_data' %}">Improper Data Listing</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Industry <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'industry_index' %}">Listing</a></li>
+              </ul>
             </li>
           </ul>
           {% block top_nav %}{% endblock %}

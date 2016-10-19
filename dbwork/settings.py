@@ -6,7 +6,7 @@ PROJECT_ROOT = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MONGODB_DATABASES = {
-  # 'default': {'name': 'dbwork'}
+  # 'default': {'name': 'ftlcopy'}
   'default': {'name': 'ftlcopy', 'host': '54.179.147.193', 'port': 27017}
 }
 
@@ -35,8 +35,7 @@ INSTALLED_APPS = [
   
   'bootstrap3',
 
-  'company_dump',
-  'people_dump',
+  'raw_data',
   'industries',
   'companies',
   'users',

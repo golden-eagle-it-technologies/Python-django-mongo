@@ -2,13 +2,26 @@ from django.conf.urls import include, url
 
 from django_mongoengine import mongo_admin
 
+from companies.views import *
+from users.views import *
+from industries.views import *
+from raw_data.views import *
+
 urlpatterns = [
-  url(r'^$', UserIndexView.as_view(), name="user_index"),
-  url(r'^user-basic-list/$', UserBasicListingView.as_view(), name="user_basic_listing"),
-  url(r'^user-experience-list/$', UserExperienceListingView.as_view(), name="user_experience_listing"),
-  url(r'^user-detail/(?P<user_id>\w+)$', get_user),
-  url(r'^company-list/$', CompanyIndexView.as_view(), name="company_index"),
-  url(r'^company-detail/(?P<company_id>\w+)$', get_company),
-  url(r'^user-current-experiences/$', UserCurrentExperiencesView.as_view(), name="current_experience_of_user"),
-  url(r'^industries/$', IndustryIndexView.as_view(), name="count_of_user_and_company_by_industry"),
+  url(r'^$', index, name="index"),
+  url(r'^users/listing/$', UserIndexView.as_view(), name="users_index"),
+  url(r'^users/basic-listing/$', UserBasicListingView.as_view(), name="users_basic"),
+  url(r'^users/experience-listing/$', UserExperienceListingView.as_view(), name="users_experience"),
+  url(r'^users/current-experience-listing/$', UserCurrentExperiencesView.as_view(), name="users_current_experience"),
+  url(r'^users/improper-listing/$', UserImproperDataView.as_view(), name="users_improper_data"),
+  url(r'^users/detail/(?P<user_id>\w+)$', get_user, name="user_detail"),
+  url(r'^companies/listing/$', CompanyIndexView.as_view(), name="company_index"),
+  url(r'^companies/detail/(?P<company_id>\w+)$', get_company, name="company_detail"),
+  url(r'^companies/improper-listing/$', CompanyImproperDataView.as_view(), name="company_improper_data"),
+  url(r'^industries/listing/$', IndustryIndexView.as_view(), name="industry_index"),
+  # url(r'^industries/detail/(?P<industry_id>\w+)$', get_industry, name="industry_detail"),
+  url(r'^raw-data/users/listing/$', PeopleDataIndexView.as_view(), name="people_data_index"),
+  url(r'^raw-data/companies/listing/$', CompanyDataIndexView.as_view(), name="company_data_index"),
+  url(r'^raw-data/users/detail/(?P<people_id>\w+)$', get_people_data, name="people_data_detail"),
+  url(r'^raw-data/companies/detail/(?P<company_id>\w+)$', get_company_data, name="company_data_detail"),
 ]

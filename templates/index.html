@@ -1,0 +1,36 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+  <div class="row">
+    <h1>Total Number of Records in Raw Data</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Collection Name</th>
+          <th>Number of Records</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Company</strong></td><td>{{ company_data }}</td></tr>
+        <tr><td><strong>People</strong></td><td>{{ people_data }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <h1>Total Number of Records in Processed Data</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Collection Name</th>
+          <th>Number of Records</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Industries</strong></td><td>{{ industries }}</td></tr>
+        <tr><td><strong>Companies</strong></td><td>{{ companies }}</td></tr>
+        <tr><td><strong>Users</strong></td><td>{{ users }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
