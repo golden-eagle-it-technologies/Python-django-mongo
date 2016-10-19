@@ -1,0 +1,85 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+  {% if user %}
+    <div>
+      <img src="{{ user.image_url|default:'#' }}">
+    </div>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>ID</th><td>{{ user.id }}</td>
+          <th>Full Name</th><td>{{ user.full_name }}</td>
+        </tr>
+        <tr>
+          <th>Family Name</th><td>{{ user.family_name }}</td>
+          <th>Given Name</th><td>{{ user.given_name }}</td>
+        </tr>
+        <tr>
+          <th>Linkedin ID</th><td>{{ user.linkedin_id }}</td>
+          <th>URL</th><td><a href="{{ user.url }}" target="_blank">{{ user.url }}</a></td>
+        </tr>
+        <tr>
+          <th>Unique ID</th><td>{{ user.unique_id }}</td>
+          <th>Canonical URL</th><td><a href="{{ user.canonical_url }}" target="_blank">{{ user.canonical_url }}</a></td>
+        </tr>
+        <tr>
+          <th>Locality</th><td>{{ user.locality }}</td>
+          <th>Industry</th><td>{{ user.industry }}</td>
+        </tr>
+        <tr>
+          <th>Languages</th><td>{{ user.languages }}</td>
+          <th>Number of Connections</th><td>{{ user.num_connections }}</td>
+        </tr>
+        <tr>
+          <th>Last Visited</th><td>{{ user.last_visited }}</td>
+          <th>Updated</th><td>{{ user.updated }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Headline</th><td>{{ user.headline }}</td>
+        </tr>
+        <tr>
+          <th>Also viewed</th>
+            <td>
+              {% if user.also_viewed %}
+                {% for av in user.also_viewed %}
+                  <li><a href="{{ av }}">{{ av }}</a></li>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Experience</th>
+            <td>
+              {% if user.experiences %}
+                {% for exp in user.experiences %}
+                  <p>
+                    <strong>Title : </strong>{{ exp.title }}<br>
+                    <strong>Start : </strong>{{ exp.start }} | <strong>End : </strong>{{ exp.end }} | 
+                    <strong>Duration : </strong>{{ exp.duration }}<br>
+                    <strong>Location : </strong>{{ exp.location }}<br>
+                    <strong>Description : </strong>{{ exp.description }}<br>
+                    <strong>Organizations : </strong>
+                  </p>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+        </tr>
+        <tr>
+          <th>Summary</th><td>{{ user.summary }}</td>
+        </tr>
+      </tbody>
+    </table>
+  {% else %}  
+    <p>No record found</p>
+  {% endif %}
+{% endblock %}

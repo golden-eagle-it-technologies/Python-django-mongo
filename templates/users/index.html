@@ -1,0 +1,38 @@
+{% extends "users/users.html" %}
+
+{% block table %}
+  <table class="table table-bordered" id="myTable" style="height:auto; max-height:100%; overflow:auto; ">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Given Name</th>
+        <th>Family Name</th>
+        <th>Image</th>
+        <th>LinkedIn Id</th>
+        <th>Unique Id</th>
+        <th>Vanity URL</th>
+        <th>Number of Connections</th>
+        <th>Locality</th>
+        <th>Last Visited</th>
+        <th>Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+          <td>{{ user.given_name }}</td>
+          <td>{{ user.family_name }}</td>
+          <td><img src="{{ user.image_url|default:'#' }}" style="width: 50%"></td>
+          <td>{{ user.linkedin_id }}</td>
+          <td>{{ user.unique_id }}</td>
+          <td>{{ user.vanity_url }}</td>
+          <td>{{ user.num_connections }}</td>
+          <td>{{ user.locality }}</td>
+          <td>{{ user.last_visited }}</td>
+          <td>{{ user.updated }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

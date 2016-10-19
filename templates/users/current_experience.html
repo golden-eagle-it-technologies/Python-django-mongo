@@ -1,0 +1,41 @@
+{% extends "users/users.html" %}
+
+{% block table %}
+  <table class="table table-bordered" id="myTable" style="height:auto; max-height:100%; overflow:auto; ">
+    <thead>
+      <tr>
+        <th rowspan="2">LinkedIn Id</th>
+        <th rowspan="2">Full Name</th>
+        <th rowspan="2">Current Job Title</th>
+        <th rowspan="2">Start Date</th>
+        <th rowspan="2">End Date</th>
+        <th colspan="2">Total Experience</th>
+        <th rowspan="2">User Industry</th>
+        <th rowspan="2">Company Industry</th>
+      </tr>
+      <tr>
+        <th>Year</th>
+        <th>Month</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.linkedin_id }}</td>
+          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name }}</a></strong></td>
+          <td>{{ user.pcurrent_experience.title }}</td>
+          <td>{{ user.pcurrent_experience.start }}</td>
+          {% if user.pcurrent_experience.present %}
+            <td>Present</td>
+          {% else %}
+            <td>{{ user.pcurrent_experience.end }}</td>
+          {% endif %}
+          <td>{{ user.pcurrent_experience.duration_year }}</td>
+          <td>{{ user.pcurrent_experience.duration_month }}</td>
+          <td>{{ user.industry }}</td>
+          <td>{{ user.pcurrent_experience.pcompany_industry|title }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

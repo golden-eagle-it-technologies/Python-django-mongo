@@ -1,0 +1,40 @@
+{% extends "users/users.html" %}
+
+{% block table %}
+  <table class="table table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th>Last Visited</th>
+        <th>LinkedIn Id</th>
+        <th>Full Name</th>
+        <th>Family Name</th>
+        <th>Given Name</th>
+        <th>Image</th>
+        <th>Languages</th>
+        <th>Locality</th>
+        <th>Industry</th>
+        <th>Number of Connections</th>
+        <th>Canonical URL</th>
+        <th>Vanity URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.last_visited }}</td>
+          <td>{{ user.linkedin_id }}</td>
+          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+          <td>{{ user.family_name }}</td>
+          <td>{{ user.given_name }}</td>
+          <td><img src="{{ user.image_url|default:'#' }}" style="width: 50%"></td>
+          <td>{{ user.planguages }}</td>
+          <td>{{ user.locality }}</td>
+          <td>{{ user.industry }}</td>
+          <td>{{ user.num_connections }}</td>
+          <td><a href="{{ user.canonical_url }}">{{ user.canonical_url }}</a></td>
+          <td>{{ user.vanity_url }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

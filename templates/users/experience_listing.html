@@ -1,0 +1,68 @@
+{% extends "users/users.html" %}
+
+{% block table %}
+  <table class="table table-bordered" style="border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>LinkedIn Id</th>
+        <th>Full Name</th>
+        <th>Family Name</th>
+        <th>Given Name</th>
+        <th>Locality</th>
+        <th>Industry</th>
+        <th>Number of Connections</th>
+      </tr>
+    </thead>
+    <tbody id ="accordion" class="accordion-group">
+      {% for user in users %}
+        <tr>
+          <td data-toggle="collapse" data-target="#exp-{{ forloop.counter }}" class="accordion-toggle" data-parent="#accordion" style="cursor: pointer"><i class="glyphicon glyphicon-plus"></i></td>
+          <td>{{ user.linkedin_id }}</td>
+          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+          <td>{{ user.family_name }}</td>
+          <td>{{ user.given_name }}</td>
+          <td>{{ user.locality }}</td>
+          <td>{{ user.industry }}</td>
+          <td>{{ user.num_connections }}</td>
+        </tr>
+        <tr >
+          <td colspan="8" class="hiddenRow">
+            <div class="accordian-body collapse" id="exp-{{ forloop.counter }}">
+              {% if user.experiences %}
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Start Month</th>
+                      <th>Start Year</th>
+                      <th>End Month</th>
+                      <th>End Year</th>
+                      <th>Location</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for exp in user.experiences %}
+                      <tr>
+                        <td>{{ exp.title }}</td>
+                        <td>{{ exp.start_month }}</td>
+                        <td>{{ exp.start_year }}</td>
+                        <td>{{ exp.pend_month }}</td>
+                        <td>{{ exp.pend_year }}</td>
+                        <td>{{ exp.location }}</td>
+                        <td>{{ exp.description }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {% else %}
+                None
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
