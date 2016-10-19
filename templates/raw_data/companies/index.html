@@ -1,0 +1,112 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <label>Sort By</label>
+          <select class="form-control inputstl" id="sortBy" name="sort">
+          <option value="_id" selected>ID</option>
+            <option value="name">Name</option>
+            <option value="linkedin_id">LinkedIn Id</option>
+            <option value="unique_id">Unique Id</option>
+            <option value="industry">Industry</option>
+            <option value="founded">Founded</option>
+            <option value="type">Type</option>
+            <option value="city">City</option>
+            <option value="state">State</option>
+            <option value="postal">Postal</option>
+            <option value="country">Country</option>
+            <option value="last_visited">Last Visited</option> 
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="form-control inputstl" id="filterBy" name="filter">
+            <option value="name" selected>Name</option>
+            <option value="linkedin_id">LinkedIn Id</option>
+            <option value="unique_id">Unique Id</option>
+            <option value="industry">Industry</option>
+            <option value="founded">Founded</option>
+            <option value="type">Type</option>
+            <option value="city">City</option>
+            <option value="state">State</option>
+            <option value="hq">Hq</option>
+            <option value="postal">Postal</option>
+            <option value="country">Country</option>                        
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <table class="table table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Users</th>
+        <th>Image</th>
+        <th>Website</th>
+        <th>LinkedIn Id</th>
+        <th>Industry</th>
+        <th>Last Visited</th>
+        <th>URL</th>
+        <th>Followers</th>
+        <th>Unique Id</th>
+        <th>Founded</th>
+        <th>Size</th>
+        <th>Type</th>
+        <th>Specialties</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Hq</th>
+        <th>Street 1</th>
+        <th>Postal</th>
+        <th>Country</th>
+        <th>Street 2</th>
+        <th>Affiliated Companies</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for company in companies %}
+        <tr>
+          <td><a href="/raw-data/companies/detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
+          <td>{{ company.employees_count }}</td>
+          <td><img src="{{ company.image_url|default:'#' }}" style=""></td>
+          <td><a href="{{ company.website }}">{{ company.website }}</a></td>
+          <td>{{ company.linkedin_id }}</td>
+          <td>{{ company.industry }}</td>
+          <td>{{ company.last_visited }}</td>
+          <td><a href="{{ company.url }}">{{ company.url }}</a></td>
+          <td>{{ company.followers }}</td>
+          <td>{{ company.unique_id }}</td>
+          <td>{{ company.founded }}</td>
+          <td>{{ company.size }}</td>
+          <td>{{ company.type }}</td>
+          <td>{{ company.specialties }}</td>
+          <td>{{ company.city }}</td>
+          <td>{{ company.state }}</td>
+          <td>{{ company.hq }}</td>
+          <td>{{ company.street_1 }}</td>
+          <td>{{ company.postal }}</td>
+          <td>{{ company.country }}</td>
+          <td>{{ company.street_2 }}</td>
+          <td>{{ company.affiliated_companies }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
