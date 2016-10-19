@@ -1,0 +1,96 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <label>Sort By</label>
+          <select class="form-control inputstl" id="sortBy" name="sort">
+            <option value="name" selected>Name</option>
+            <option value="linkedin_id">LinkedIn Id</option>
+            <option value="unique_id">Unique Id</option>
+            <option value="followers">Followers</option>
+            <option value="postal">Postal</option>
+            <option value="hq">Hq</option>
+            <option value="city">City</option>
+            <option value="state">State</option>
+            <option value="country">Country</option>
+            <option value="last_visited">Last Visited</option>
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="form-control inputstl" id="filterBy" name="filter">
+            <option value="name" selected>Name</option>
+            <option value="linkedin_id">LinkedIn Id</option>
+            <option value="unique_id">Unique Id</option>
+            <option value="followers">Followers</option>
+            <option value="postal">Postal</option>
+            <option value="hq">Hq</option>
+            <option value="city">City</option>
+            <option value="state">State</option>
+            <option value="country">Country</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <table class="table table-bordered" id="myTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Website</th>
+        <th>LinkedIn Id</th>
+        <th>Automatically Generated</th>
+        <th>Industry</th>
+        <th>URL</th>
+        <th>Followers</th>
+        <th>Unique Id</th>
+        <th>Hq</th>
+        <th>Postal</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Last Visited</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for company in companies %}
+        <tr>
+          <td><a href="/companies/detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
+          <td><img src="{{ company.image_url|default:'#' }}"></td>
+          <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
+          <td>{{ company.linkedin_id }}</td>
+          <td>{{ company.automatically_generated }}</td>
+          <td>{{ company.industry|title }}</td>
+          <td><a href="{{ company.url }}" target="_blank">{{ company.url }}</a></td>
+          <td>{{ company.followers }}</td>
+          <td>{{ company.unique_id }}</td>
+          <td>{{ company.hq }}</td>
+          <td>{{ company.postal }}</td>
+          <td>{{ company.city }}</td>
+          <td>{{ company.state }}</td>
+          <td>{{ company.country }}</td>
+          <td>{{ company.last_visited }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

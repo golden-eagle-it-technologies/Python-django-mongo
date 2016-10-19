@@ -9,6 +9,8 @@ import operator, re
 from industries.models import Industry
 
 class Company(Document):
+  meta = {"collection": "new_company"}
+
   also_viewed = ListField(blank=True, null=True)
   automatically_generated = BooleanField(blank=True, null=True)
   city = StringField(blank=True, null=True)
@@ -31,4 +33,5 @@ class Company(Document):
   vanity_url = BooleanField(blank=True, null=True)
   website = StringField(blank=True, null=True)
 
-  meta = {"collection": "new_company"}
+  def __unicode__(self):
+    return self.name

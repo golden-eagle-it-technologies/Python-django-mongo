@@ -5,50 +5,54 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django_mongoengine.forms.fields import DictField
 from django_mongoengine.views import ListView, DetailView
 from companies.models import Company
+from industries.models import Industry
 
 class CompanyIndexView(ListView):
   document = Company
-  template_name = 'company/index.html'
-  context_object_name = 'companies_list'
+  template_name = 'companies/index.html'
+  context_object_name = 'companies'
   paginate_by = 50
 
   def get_queryset(self):
     data = self.request.GET
     
-    try:
-      sort = data['sort']
-    except:
-      sort = 'name'
-    try:
-      name = data['search']
-    except:
-      name = ''
-    if (name != ''):
+    sort = data['sort'] if 'sort' in data else 'name'
+    name = data['search'] if 'search' in data else ''
+    
+    if name != '':
       field = data['filter']
       field = field + '__icontains'
-      
       object_list = self.document.objects(**{field : name}).order_by(sort)
     else:
       object_list = self.document.objects.order_by(sort)
     return object_list
 
+class CompanyImproperDataView(ListView):
+  document = Company
+  template_name = 'companies/index.html'
+  context_object_name = 'companies'
+  paginate_by = 50
+
+  def get_queryset(self):
+    data = self.request.GET
+    
+    sort = data['sort'] if 'sort' in data else 'name'
+    name = data['search'] if 'search' in data else ''
+    
+    if (name != ''):
+      field = data['filter']
+      field = field + '__icontains'
+      object_list = self.document.objects(**{field : name}).order_by(sort)
+    else:
+      object_list = self.document.objects.order_by(sort)
+    return object_list
 
 def get_company(request, company_id=None):
   if company_id:
     rdata = {}
-    company_data = {}
     company = Company.objects.get(id=company_id)
-    rdata['company'] = company_data
-    rdata['key'] = company._key
-    company_fields = Company._meta.get_fields()
-    for item in company_fields:
-      key = item.name
-      if key == 'last_posts_timestamps':
-        company_data[key] = company.lposts_timestamps
-      else:
-        company_data[key] = company[key]
-
-    return render(request, 'company/show.html', rdata)
+    rdata['company'] = company
+    return render(request, 'companies/show.html', rdata)
   else:
     return redirect('/')
 
