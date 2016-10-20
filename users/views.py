@@ -58,9 +58,9 @@ class UserIndexView(ListView):
     if (name != ''):
       field = data['filter']
       field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(**{field : name}).filter(full_name__ne=None).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(full_name__ne=None).order_by(sort)
     return object_list
 
 class UserBasicListingView(ListView):
@@ -78,9 +78,9 @@ class UserBasicListingView(ListView):
     if (name != ''):
       field = data['filter']
       field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(**{field : name}).filter(full_name__ne=None).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(full_name__ne=None).order_by(sort)
     return object_list
 
 class UserExperienceListingView(ListView):
@@ -98,9 +98,9 @@ class UserExperienceListingView(ListView):
     if (name != ''):
       field = data['filter']
       field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(**{field : name}).filter(full_name__ne=None).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(full_name__ne=None).order_by(sort)
     return object_list
 
 class UserCurrentExperiencesView(ListView):
@@ -118,9 +118,9 @@ class UserCurrentExperiencesView(ListView):
     if (name != ''):
       field = data['filter']
       field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(**{field : name}).filter(full_name__ne=None).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__nin=[None,'']).order_by(sort)
+      object_list = self.document.objects(full_name__ne=None).order_by(sort)
     return object_list
 
 class UserImproperDataView(ListView):
@@ -138,7 +138,7 @@ class UserImproperDataView(ListView):
     if (name != ''):
       field = data['filter']
       field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__in=[None,'']).order_by(sort)
+      object_list = self.document.objects(**{field : name}).filter(full_name=None).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__in=[None,'']).order_by(sort)
+      object_list = self.document.objects(full_name=None).order_by(sort)
     return object_list
