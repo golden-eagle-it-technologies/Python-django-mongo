@@ -34,27 +34,32 @@
 
   <div class="row">
     <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Records : <span class="tcount">{{ industries.all.count }}</span></strong>
+      </span>
       {% bootstrap_pagination page_obj %}
     </div>
   </div>
 
-  <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Number of Companies</th>
-        <th>Number of Users</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for industry in industries %}
+  <div class="row">
+    <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
+      <thead>
         <tr>
-          <td><a href="#" target="_blank">{{ industry.name|title }}</a></td>
-          <td>{{ industry.number_companies }}</td>
-          <td>{{ industry.number_users }}</td>
+          <th>Name</th>
+          <th>Number of Companies</th>
+          <th>Number of Users</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for industry in industries %}
+          <tr>
+            <td><a href="#" target="_blank">{{ industry.name|title }}</a></td>
+            <td>{{ industry.number_companies }}</td>
+            <td>{{ industry.number_users }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

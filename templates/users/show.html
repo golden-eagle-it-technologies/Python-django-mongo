@@ -67,6 +67,13 @@
                     <strong>Location : </strong>{{ exp.location }}<br>
                     <strong>Description : </strong>{{ exp.description }}<br>
                     <strong>Organizations : </strong>
+                    <strong>Name : </strong>
+                    {% if exp.pcompany %}
+                      <a href="/companies/detail/{{ exp.pcompany.id }}" target="_blank">{{ exp.company_name }}</a>
+                    {% else %}
+                      {{ exp.company_name }}
+                    {% endif %} | 
+                    <strong>Unique Id : </strong>{{ exp.company_unique_id }}
                   </p>
                 {% endfor %}
               {% else %}

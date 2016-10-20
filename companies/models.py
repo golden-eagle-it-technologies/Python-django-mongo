@@ -32,6 +32,7 @@ class Company(Document):
   url = StringField(blank=True, null=True)
   vanity_url = BooleanField(blank=True, null=True)
   website = StringField(blank=True, null=True)
+  is_system = BooleanField(blank=True, null=True,default=True)
 
   def __unicode__(self):
     return self.name

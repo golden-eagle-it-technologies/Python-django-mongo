@@ -47,50 +47,55 @@
 
   <div class="row">
     <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Records : <span class="tcount">{{ companies.all.count }}</span></strong>
+      </span>
       {% bootstrap_pagination page_obj %}
     </div>
   </div>
 
-  <table class="table table-bordered" id="myTable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Image</th>
-        <th>Website</th>
-        <th>LinkedIn Id</th>
-        <th>Automatically Generated</th>
-        <th>Industry</th>
-        <th>URL</th>
-        <th>Followers</th>
-        <th>Unique Id</th>
-        <th>Hq</th>
-        <th>Postal</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Country</th>
-        <th>Last Visited</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for company in companies %}
+  <div class="row">
+    <table class="table table-bordered" id="myTable">
+      <thead>
         <tr>
-          <td><a href="/companies/detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
-          <td><img src="{{ company.image_url|default:'#' }}"></td>
-          <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
-          <td>{{ company.linkedin_id }}</td>
-          <td>{{ company.automatically_generated }}</td>
-          <td>{{ company.industry|title }}</td>
-          <td><a href="{{ company.url }}" target="_blank">{{ company.url }}</a></td>
-          <td>{{ company.followers }}</td>
-          <td>{{ company.unique_id }}</td>
-          <td>{{ company.hq }}</td>
-          <td>{{ company.postal }}</td>
-          <td>{{ company.city }}</td>
-          <td>{{ company.state }}</td>
-          <td>{{ company.country }}</td>
-          <td>{{ company.last_visited }}</td>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Website</th>
+          <th>LinkedIn Id</th>
+          <th>Automatically Generated</th>
+          <th>Industry</th>
+          <th>URL</th>
+          <th>Followers</th>
+          <th>Unique Id</th>
+          <th>Hq</th>
+          <th>Postal</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Country</th>
+          <th>Last Visited</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for company in companies %}
+          <tr>
+            <td><a href="/companies/detail/{{ company.id }}" target="_blank">{{ company.name }}</a></td>
+            <td><img src="{{ company.image_url|default:'#' }}"></td>
+            <td><a href="{{ company.website }}" target="_blank">{{ company.website }}</a></td>
+            <td>{{ company.linkedin_id }}</td>
+            <td>{{ company.automatically_generated }}</td>
+            <td>{{ company.industry|title }}</td>
+            <td><a href="{{ company.url }}" target="_blank">{{ company.url }}</a></td>
+            <td>{{ company.followers }}</td>
+            <td>{{ company.unique_id }}</td>
+            <td>{{ company.hq }}</td>
+            <td>{{ company.postal }}</td>
+            <td>{{ company.city }}</td>
+            <td>{{ company.state }}</td>
+            <td>{{ company.country }}</td>
+            <td>{{ company.last_visited }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

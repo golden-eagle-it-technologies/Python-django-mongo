@@ -42,6 +42,9 @@
 
   <div class="row">
     <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Records : <span class="tcount">{{ users.all.count }}</span></strong>
+      </span>
       {% bootstrap_pagination page_obj %}
     </div>
   </div>

@@ -58,6 +58,15 @@ class Experience(Document):
 
   pcompany_industry = property(_get_company_industry)
 
+  def _get_company(self):
+    try:
+      compobj = Company.objects.get(unique_id=self.company_unique_id)
+      return compobj
+    except:
+      return None
+
+  pcompany = property(_get_company)
+
 
 class User(Document):
   meta = {"collection": "new_people"}
@@ -93,22 +102,45 @@ class User(Document):
 
   planguages = property(_get_languages)
 
-  def _get_current_experience(self):
+  @property
+  def latest_experience(self):
+    return self.experiences and self.experiences[0] or {}
+
+  @property
+  def current_experience(self):
     if(self.experiences):
       count = len(self.experiences)
+
+      ctx = {}
+
       last_exp = self.experiences[0]
       first_exp = self.experiences[count-1]
-      years = (current_date.year - first_exp.start_year) if first_exp.start_year else None
-      months = (current_date.month - first_exp.start_month) if first_exp.start_year and first_exp.start_month else None
-      if(months > 12):
+      years = ((last_exp.end_year or current_date.year) - first_exp.start_year) if first_exp.start_year else None
+      months = ((last_exp.end_month or current_date.month) - first_exp.start_month) if first_exp.start_year and first_exp.start_month else None
+      if(months < 0):
         years -= 1
         months += 12
 
-      last_exp['duration_month'] = months
-      last_exp['duration_year'] = years
-      last_exp['start'] = first_exp.start
-      return last_exp
+      ctx['duration_month'] = months
+      ctx['duration_year'] = years
+      ctx['start'] = first_exp.start
+      ctx['end'] = last_exp.end
+
+      d_months = 0
+      d_years = 0
+      for exp in self.experiences:
+          if exp.duration_month:
+            d_months += exp.duration_month
+          if exp.duration_year:
+            d_years += exp.duration_year
+
+      if d_months > 12:
+        d_years += d_months/12
+        d_months = d_months%12
+
+      ctx['d_months'] = d_months
+      ctx['d_years'] = ctx['duration_year'] if ctx['duration_year'] < d_years else d_years
+
+      return ctx
     else:
       return None
-
-  pcurrent_experience = property(_get_current_experience)

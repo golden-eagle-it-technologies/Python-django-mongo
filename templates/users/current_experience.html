@@ -10,10 +10,13 @@
         <th rowspan="2">Start Date</th>
         <th rowspan="2">End Date</th>
         <th colspan="2">Total Experience</th>
+        <th colspan="2">Actual Total Experience</th>
         <th rowspan="2">User Industry</th>
         <th rowspan="2">Company Industry</th>
       </tr>
       <tr>
+        <th>Year</th>
+        <th>Month</th>
         <th>Year</th>
         <th>Month</th>
       </tr>
@@ -23,17 +26,19 @@
         <tr>
           <td>{{ user.linkedin_id }}</td>
           <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name }}</a></strong></td>
-          <td>{{ user.pcurrent_experience.title }}</td>
-          <td>{{ user.pcurrent_experience.start }}</td>
-          {% if user.pcurrent_experience.present %}
+          <td>{{ user.latest_experience.title }}</td>
+          <td>{{ user.current_experience.start }}</td>
+          {% if user.latest_experience.present %}
             <td>Present</td>
           {% else %}
-            <td>{{ user.pcurrent_experience.end }}</td>
+            <td>{{ user.current_experience.end }}</td>
           {% endif %}
-          <td>{{ user.pcurrent_experience.duration_year }}</td>
-          <td>{{ user.pcurrent_experience.duration_month }}</td>
+          <td>{{ user.current_experience.duration_year }}</td>
+          <td>{{ user.current_experience.duration_month }}</td>
+          <td>{{ user.current_experience.d_years }}</td>
+          <td>{{ user.current_experience.d_months }}</td>
           <td>{{ user.industry }}</td>
-          <td>{{ user.pcurrent_experience.pcompany_industry|title }}</td>
+          <td>{{ user.latest_experience.pcompany_industry|title }}</td>
         </tr>
       {% endfor %}
     </tbody>
