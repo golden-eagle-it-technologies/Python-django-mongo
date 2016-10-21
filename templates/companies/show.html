@@ -83,19 +83,8 @@
           <th>Overview</th><td>{{ company.overview }}</td>
         </tr>
         <tr>
-          <th>Employees On LinkedIn</th>
-          <td>
-            {% if company.employees_on_linkedin %}
-              {% for emp in company.employees_on_linkedin %}
-                <p>
-                  <strong>URL : </strong><a href="{{ emp.url }}">{{ emp.url }}</a> | 
-                  <strong>Unique Id : </strong>{{ emp.unique_id }}
-                </p>
-              {% endfor %}
-            {% else %}
-              None
-            {% endif %}
-          </td>
+          <th>Employees On User Database</th>
+          <td>{{ company.users_count }}</td>
         </tr>
       </tbody>
     </table>

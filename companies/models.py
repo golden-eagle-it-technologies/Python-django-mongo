@@ -36,3 +36,16 @@ class Company(Document):
 
   def __unicode__(self):
     return self.name
+
+  @property
+  def users_count(self):
+    from users.models import Experience
+    return Experience.objects(company=self.id).count()
+
+  # @property
+  # def linkedin_users_count(self):
+  #   from raw_data.models import CompanyData
+  #   try:
+  #     return CompanyData.objects.get(id=self.id).employees_on_linkedin.count()
+  #   except:
+  #     return 0
