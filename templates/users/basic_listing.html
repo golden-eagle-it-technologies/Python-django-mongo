@@ -29,7 +29,7 @@
           <td><img src="{{ user.image_url|default:'#' }}" style="width: 50%"></td>
           <td>{{ user.planguages }}</td>
           <td>{{ user.locality }}</td>
-          <td>{{ user.industry }}</td>
+          <td>{{ user.industry|title }}</td>
           <td>{{ user.num_connections }}</td>
           <td><a href="{{ user.canonical_url }}">{{ user.canonical_url }}</a></td>
           <td>{{ user.vanity_url }}</td>

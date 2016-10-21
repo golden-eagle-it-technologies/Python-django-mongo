@@ -18,7 +18,7 @@ MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augus
 class Experience(Document):
   meta = {"collection": "new_experience"}
 
-  # company = StringField(blank=True, null=True)
+  company = ReferenceField(Company, blank=True, null=True)
   description = StringField(blank=True, null=True)
   duration_month = IntField(blank=True, null=True)
   duration_year = IntField(blank=True, null=True)
@@ -39,39 +39,18 @@ class Experience(Document):
   def __unicode__(self):
     return self.title
 
-  def _get_end_month(self):
+  @property
+  def pend_month(self):
     return 'Present' if current_date.year == self.end_year and current_date.month == self.end_month else self.end_month
 
-  pend_month = property(_get_end_month)
-
-  def _get_end_year(self):
+  @property
+  def pend_year(self):
     return 'Present' if current_date.year == self.end_year else self.end_year
-
-  pend_year = property(_get_end_year)
-
-  def _get_company_industry(self):
-    try:
-      compobj = Company.objects.get(unique_id=self.company_unique_id)
-      return compobj.industry
-    except:
-      return 'None'
-
-  pcompany_industry = property(_get_company_industry)
-
-  def _get_company(self):
-    try:
-      compobj = Company.objects.get(unique_id=self.company_unique_id)
-      return compobj
-    except:
-      return None
-
-  pcompany = property(_get_company)
-
 
 class User(Document):
   meta = {"collection": "new_people"}
 
-  current_industry = StringField(blank=True, null=True)
+  current_industry = ReferenceField(Industry, blank=True, null=True)
   canonical_url = StringField(blank=True, null=True)
   vanity_url = BooleanField(blank=True, null=True)
   experiences = ListField(ReferenceField(Experience), default=list, blank=True, null=True)
@@ -94,13 +73,12 @@ class User(Document):
   def __unicode__(self):
     return self.full_name
 
-  def _get_languages(self):
+  @property
+  def planguages(self):
     try:
       return (', '.join(map(str, self.languages))).title() if self.languages else 'None'
     except:
       return 'Not Processable'
-
-  planguages = property(_get_languages)
 
   @property
   def latest_experience(self):

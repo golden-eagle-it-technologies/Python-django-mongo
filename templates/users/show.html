@@ -66,14 +66,12 @@
                     <strong>Duration : </strong>{{ exp.duration }}<br>
                     <strong>Location : </strong>{{ exp.location }}<br>
                     <strong>Description : </strong>{{ exp.description }}<br>
-                    <strong>Organizations : </strong>
-                    <strong>Name : </strong>
-                    {% if exp.pcompany %}
-                      <a href="/companies/detail/{{ exp.pcompany.id }}" target="_blank">{{ exp.company_name }}</a>
+                    <strong>Company : </strong>
+                    {% if exp.company %}
+                      <a href="/companies/detail/{{ exp.company.id }}" target="_blank">{{ exp.company.name }}</a>
                     {% else %}
                       {{ exp.company_name }}
-                    {% endif %} | 
-                    <strong>Unique Id : </strong>{{ exp.company_unique_id }}
+                    {% endif %}
                   </p>
                 {% endfor %}
               {% else %}

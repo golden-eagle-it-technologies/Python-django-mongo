@@ -20,6 +20,7 @@
             <option value="state">State</option>
             <option value="country">Country</option>
             <option value="last_visited">Last Visited</option>
+            <option value="is_system">System Generated</option>
           </select>
         </div>
         <label>Search By</label>
@@ -73,6 +74,7 @@
           <th>State</th>
           <th>Country</th>
           <th>Last Visited</th>
+          <th>Is System</th>
         </tr>
       </thead>
       <tbody>
@@ -93,6 +95,7 @@
             <td>{{ company.state }}</td>
             <td>{{ company.country }}</td>
             <td>{{ company.last_visited }}</td>
+            <td>{{ company.is_system }}</td>
           </tr>
         {% endfor %}
       </tbody>

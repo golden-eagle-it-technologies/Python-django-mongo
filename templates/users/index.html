@@ -20,11 +20,11 @@
     <tbody>
       {% for user in users %}
         <tr>
-          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name}}</a></strong></td>
+          <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name }}</a></strong></td>
           <td>{{ user.given_name }}</td>
           <td>{{ user.family_name }}</td>
           <td><img src="{{ user.image_url|default:'#' }}" style="width: 50%"></td>
-          <td>{{ user.linkedin_id }}</td>
+          <td><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.linkedin_id }}</a></td>
           <td>{{ user.unique_id }}</td>
           <td>{{ user.vanity_url }}</td>
           <td>{{ user.num_connections }}</td>

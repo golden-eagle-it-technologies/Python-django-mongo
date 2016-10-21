@@ -39,7 +39,7 @@
                       <th>End Month</th>
                       <th>End Year</th>
                       <th>Location</th>
-                      <th>Description</th>
+                      <th>Company</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -51,7 +51,7 @@
                         <td>{{ exp.pend_month }}</td>
                         <td>{{ exp.pend_year }}</td>
                         <td>{{ exp.location }}</td>
-                        <td>{{ exp.description }}</td>
+                        <td><a href="/companies/detail/{{ exp.company.id }}" target="_blank">{{ exp.company|title }}</a></td>
                       </tr>
                     {% endfor %}
                   </tbody>

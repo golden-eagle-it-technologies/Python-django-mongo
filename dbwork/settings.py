@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MONGODB_DATABASES = {
   # 'default': {'name': 'ftlcopy'}
-  'default': {'name': 'ftlcopy', 'host': '54.179.147.193', 'port': 27017}
+  'default': {'name': 'ftlcopy', 'host': '52.77.232.185', 'port': 27017}
 }
 
 # SECURITY WARNING: keep the secret key used in production secret!

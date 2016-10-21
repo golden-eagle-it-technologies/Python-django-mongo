@@ -12,6 +12,7 @@
         <th colspan="2">Total Experience</th>
         <th colspan="2">Actual Total Experience</th>
         <th rowspan="2">User Industry</th>
+        <th rowspan="2">Current User Industry</th>
         <th rowspan="2">Company Industry</th>
       </tr>
       <tr>
@@ -37,8 +38,9 @@
           <td>{{ user.current_experience.duration_month }}</td>
           <td>{{ user.current_experience.d_years }}</td>
           <td>{{ user.current_experience.d_months }}</td>
-          <td>{{ user.industry }}</td>
-          <td>{{ user.latest_experience.pcompany_industry|title }}</td>
+          <td>{{ user.industry|title }}</td>
+          <td>{{ user.current_industry|title }}</td>
+          <td>{{ user.latest_experience.company.industry|title }}</td>
         </tr>
       {% endfor %}
     </tbody>

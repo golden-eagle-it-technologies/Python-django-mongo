@@ -7,6 +7,13 @@
   {% if company %}
     <div>
       <img src="{{ company.image_url|default:'#' }}">
+      <p>
+        {% if company.is_system %}
+          <strong style="color:green">System Generated Record</strong>
+        {% else %}
+          <strong style="color:red">Mannuly Generated Record</strong>
+        {% endif %}
+      </p>
     </div>
     <table class="table table-bordered">
       <tbody>
