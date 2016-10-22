@@ -35,10 +35,22 @@
             <option value="city">City</option>
             <option value="state">State</option>
             <option value="country">Country</option>
+            <option value="industry">Industry</option>
+            <option value="is_system">Is System</option>
           </select>
         </div>
         <div class="form-group">
-          <input type="search" class="form-control" id="search-field" name="search" placeholder="Type search text here">
+          <input type="search" class="search-class form-control" id="search-field" placeholder="Type search text here">
+          <select style="display:none" id="country-select" class="search-class form-control">
+          </select>
+          <select style="display:none" id="industry-select" class="search-class form-control">
+          </select>
+          <select style="display:none" id="system-select" class="search-class form-control">
+            <option value="">Select</option>
+            <option value="1">True</option>
+            <option value="0">False</option>
+          </select>
+          <input type="hidden" value="" id="search-param" name="search">
           <input type="hidden" id="page-no" value="1" name="page">
         </div>
         <button type="submit" class="btn btn-primary">Filter</button>

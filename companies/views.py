@@ -21,8 +21,12 @@ class CompanyIndexView(ListView):
     
     if name != '':
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).order_by(sort)
+      if(field!='is_system'):
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).order_by(sort)
+      else:
+        name = True if name == '1' else False
+        object_list = self.document.objects(is_system=name).order_by(sort)
     else:
       object_list = self.document.objects.order_by(sort)
     return object_list
@@ -39,10 +43,14 @@ class CompanyImproperDataView(ListView):
     sort = data['sort'] if 'sort' in data else 'name'
     name = data['search'] if 'search' in data else ''
     
-    if (name != ''):
+    if name != '':
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).order_by(sort)
+      if(field!='is_system'):
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).order_by(sort)
+      else:
+        name = True if name == '1' else False
+        object_list = self.document.objects(is_system=name).order_by(sort)
     else:
       object_list = self.document.objects.order_by(sort)
     return object_list
@@ -56,3 +64,6 @@ def get_company(request, company_id=None):
   else:
     return redirect('/')
 
+def get_industries(request):
+  industries = Industry.objects.order_by('name')
+  return HttpResponse(industries.to_json())

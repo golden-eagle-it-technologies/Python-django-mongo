@@ -40,7 +40,8 @@ class Company(Document):
   @property
   def users_count(self):
     from users.models import Experience
-    return Experience.objects(company=self.id).count()
+    # return Experience.objects(company=self.id).count()
+    return 0
 
   # @property
   # def linkedin_users_count(self):

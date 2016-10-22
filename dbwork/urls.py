@@ -24,4 +24,5 @@ urlpatterns = [
   url(r'^raw-data/companies/listing/$', CompanyDataIndexView.as_view(), name="company_data_index"),
   url(r'^raw-data/users/detail/(?P<people_id>\w+)$', get_people_data, name="people_data_detail"),
   url(r'^raw-data/companies/detail/(?P<company_id>\w+)$', get_company_data, name="company_data_detail"),
+  url(r'^get-all-industries/$', get_industries, name="company_data_detail"),
 ]
