@@ -47,6 +47,14 @@ class Experience(Document):
   def pend_year(self):
     return 'Present' if current_date.year == self.end_year else self.end_year
 
+  @property
+  def user_name(self):
+    try:
+      return User.objects.get(experiences__in=[self.id])
+    except:
+      return {}
+
+
 class User(Document):
   meta = {"collection": "new_people"}
 

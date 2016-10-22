@@ -33,19 +33,16 @@ class Company(Document):
   vanity_url = BooleanField(blank=True, null=True)
   website = StringField(blank=True, null=True)
   is_system = BooleanField(blank=True, null=True,default=True)
+  users_count = IntField(blank=True, null=True)
 
   def __unicode__(self):
     return self.name
 
   @property
-  def users_count(self):
+  def experiences_list(self):
     from users.models import Experience
-    return Experience.objects(company=self.id).count()
+    return Experience.objects(company=self.id)
 
-  # @property
-  # def linkedin_users_count(self):
-  #   from raw_data.models import CompanyData
-  #   try:
-  #     return CompanyData.objects.get(id=self.id).employees_on_linkedin.count()
-  #   except:
-  #     return 0
+  @property
+  def users_counts(self):
+    return self.experiences_list.count()

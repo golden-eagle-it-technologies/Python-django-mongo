@@ -15,79 +15,109 @@
         {% endif %}
       </p>
     </div>
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th>Name</th><td>{{ company.name }}</td>
-          <th>Website</th><td><a href="{{ company.website }}">{{ company.website }}</a></td>
-        </tr>
-        <tr>
-          <th>Unique Id</th><td>{{ company.unique_id }}</td>
-          <th>LinkedIn Id</th><td>{{ company.linkedin_id }}</td>
-        </tr>
-        <tr>
-          <th>Industry</th><td>{{ company.industry }}</td>
-          <th>Last Visited</th><td>{{ company.last_visited }}</td>
-        </tr>
-        <tr>
-          <th>URL</th><td><a href="{{ company.url }}">{{ company.url }}</a></td>
-          <th>Followers</th><td>{{ company.followers }}</td>
-        </tr>
-        <tr>
-          <th>Automatically Generated</th><td>{{ company.automatically_generated }}</td>
-          <th>Size</th><td>{{ company.size }}</td>
-        </tr>
-        <tr>
-          <th>Founded</th><td>{{ company.founded }}</td>
-          <th>Type</th><td>{{ company.type }}</td>
-        </tr>
-        <tr>
-          <th>HQ</th><td>{{ company.hq }}</td>
-          <th>Affiliated Companies</th><td>{{ company.affiliated_companies }}</td>
-        </tr>
-        <tr>
-          <th>Street 1</th><td>{{ company.street_1 }}</td>
-          <th>Street 2</th><td>{{ company.street_2 }}</td>
-        </tr>
-        <tr>
-          <th>City</th><td>{{ company.city }}</td>
-          <th>State</th><td>{{ company.state }}</td>
-        </tr>
-        <tr>
-          <th>Postal</th><td>{{ company.postal }}</td>
-          <th>Country</th><td>{{ company.country }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table table-bordered">
-      <tbody>
-        <tr>
-          <th>Also Viewed</th>
-          <td>
-            {% if company.also_viewed %}
-              {% for av in company.also_viewed %}
-                <li><a href="{{ av }}">{{ av }}</a></li>
-              {% endfor %}
-            {% else %}
-              None
-            {% endif %}
-          </td>
-        </tr>
-        <tr>
-          <th>Specialties</th><td>{{ company.specialties }}</td>
-        </tr>
-        <tr>
-          <th>Last Posts Timestamps</th><td>{{ company.last_posts_timestamps }}</td>
-        </tr>
-        <tr>
-          <th>Overview</th><td>{{ company.overview }}</td>
-        </tr>
-        <tr>
-          <th>Employees On User Database</th>
-          <td>{{ company.users_count }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Name</th><td>{{ company.name }}</td>
+            <th>Website</th><td><a href="{{ company.website }}">{{ company.website }}</a></td>
+          </tr>
+          <tr>
+            <th>Unique Id</th><td>{{ company.unique_id }}</td>
+            <th>LinkedIn Id</th><td>{{ company.linkedin_id }}</td>
+          </tr>
+          <tr>
+            <th>Industry</th><td>{{ company.industry }}</td>
+            <th>Last Visited</th><td>{{ company.last_visited }}</td>
+          </tr>
+          <tr>
+            <th>URL</th><td><a href="{{ company.url }}">{{ company.url }}</a></td>
+            <th>Followers</th><td>{{ company.followers }}</td>
+          </tr>
+          <tr>
+            <th>Automatically Generated</th><td>{{ company.automatically_generated }}</td>
+            <th>Size</th><td>{{ company.size }}</td>
+          </tr>
+          <tr>
+            <th>Founded</th><td>{{ company.founded }}</td>
+            <th>Type</th><td>{{ company.type }}</td>
+          </tr>
+          <tr>
+            <th>HQ</th><td>{{ company.hq }}</td>
+            <th>Affiliated Companies</th><td>{{ company.affiliated_companies }}</td>
+          </tr>
+          <tr>
+            <th>Street 1</th><td>{{ company.street_1 }}</td>
+            <th>Street 2</th><td>{{ company.street_2 }}</td>
+          </tr>
+          <tr>
+            <th>City</th><td>{{ company.city }}</td>
+            <th>State</th><td>{{ company.state }}</td>
+          </tr>
+          <tr>
+            <th>Postal</th><td>{{ company.postal }}</td>
+            <th>Country</th><td>{{ company.country }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>Also Viewed</th>
+            <td>
+              {% if company.also_viewed %}
+                {% for av in company.also_viewed %}
+                  <li><a href="{{ av }}">{{ av }}</a></li>
+                {% endfor %}
+              {% else %}
+                None
+              {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <th>Specialties</th><td>{{ company.specialties }}</td>
+          </tr>
+          <tr>
+            <th>Last Posts Timestamps</th><td>{{ company.last_posts_timestamps }}</td>
+          </tr>
+          <tr>
+            <th>Overview</th><td>{{ company.overview }}</td>
+          </tr>
+          <tr>
+            <th>Employees On User Database</th>
+            <td>{{ company.users_counts }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {% if company.experiences_list %}
+      <div class="row">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Title</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Duration Year</th>
+              <th>Duration Month</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for experience in company.experiences_list %}
+            <tr>
+              <td><a href="/users/detail/{{ experience.user_name.id }}" target="_blank">{{ experience.user_name }}</a></td>
+              <td>{{ experience.title|title }}</td>
+              <td>{{ experience.start }}</td>
+              <td>{{ experience.end }}</td>
+              <td>{{ experience.duration_year }}</td>
+              <td>{{ experience.duration_month }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
   {% else %}  
     <p>No record found</p>
   {% endif %}
