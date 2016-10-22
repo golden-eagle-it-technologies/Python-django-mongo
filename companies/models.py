@@ -46,4 +46,5 @@ class Company(Document):
 
   @property
   def users_counts(self):
-    return self.experiences_list.count()
+    count = self.experiences_list.count()
+    return count and count or 1
