@@ -7,6 +7,11 @@
         <th rowspan="2">LinkedIn Id</th>
         <th rowspan="2">Full Name</th>
         <th rowspan="2">E-mail ID</th>
+        <th rowspan="2">Reason</th>
+        <th rowspan="2">Found</th>
+        <th rowspan="2">Correctness</th>
+        <th rowspan="2">Confidence</th>
+        <th rowspan="2">Domain</th>
         <th rowspan="2">Current Job Title</th>
         <th rowspan="2">Start Date</th>
         <th rowspan="2">End Date</th>
@@ -29,7 +34,12 @@
         <tr>
           <td>{{ user.linkedin_id }}</td>
           <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name }}</a></strong></td>
-          <td>{{ user.user_email }}</td>
+          <td>{{ user.user_email.email }}</td>
+          <td>{{ user.user_email.reason }}</td>
+          <td>{{ user.user_email.found }}</td>
+          <td>{{ user.user_email.correctness }}</td>
+          <td>{{ user.user_email.confidence }}</td>
+          <td><a href="http://{{ user.user_email.domain }}" target="_blank">{{ user.user_email.domain }}</a></td>
           <td>{{ user.latest_experience.title }}</td>
           <td>{{ user.current_experience.start }}</td>
           {% if user.latest_experience.present %}
