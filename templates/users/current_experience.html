@@ -6,6 +6,7 @@
       <tr>
         <th rowspan="2">LinkedIn Id</th>
         <th rowspan="2">Full Name</th>
+        <th rowspan="2">E-mail ID</th>
         <th rowspan="2">Current Job Title</th>
         <th rowspan="2">Start Date</th>
         <th rowspan="2">End Date</th>
@@ -28,6 +29,7 @@
         <tr>
           <td>{{ user.linkedin_id }}</td>
           <td><strong><a href="/users/detail/{{ user.id }}" target="_blank">{{ user.full_name }}</a></strong></td>
+          <td>{{ user.user_email }}</td>
           <td>{{ user.latest_experience.title }}</td>
           <td>{{ user.current_experience.start }}</td>
           {% if user.latest_experience.present %}

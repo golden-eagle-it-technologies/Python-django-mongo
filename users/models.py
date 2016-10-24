@@ -130,3 +130,28 @@ class User(Document):
       return ctx
     else:
       return None
+
+  @property
+  def user_email(self):
+    try:
+      return UserEmail.objects.get(people_id=self.id)
+    except:
+      return None
+
+
+class UserEmail(Document):
+  meta = {"collection": "user_email"}
+
+  reason = StringField(blank=True, null=True)
+  found = BooleanField(blank=True, null=True)
+  correctness = IntField(blank=True, null=True)
+  company_id = ReferenceField(Company, blank=True, null=True)
+  people_id = ReferenceField(User, blank=True, null=True)
+  email = StringField(blank=True, null=True)
+  confidence = StringField(blank=True, null=True)
+  name = StringField(blank=True, null=True)
+  surname = StringField(blank=True, null=True)
+  domain = StringField(blank=True, null=True)
+
+  def __unicode__(self):
+    return self.email
