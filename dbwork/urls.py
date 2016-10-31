@@ -6,6 +6,7 @@ from companies.views import *
 from users.views import *
 from industries.views import *
 from raw_data.views import *
+from management_level.views import *
 
 urlpatterns = [
   url(r'^$', index, name="index"),
@@ -25,4 +26,7 @@ urlpatterns = [
   url(r'^raw-data/users/detail/(?P<people_id>\w+)$', get_people_data, name="people_data_detail"),
   url(r'^raw-data/companies/detail/(?P<company_id>\w+)$', get_company_data, name="company_data_detail"),
   url(r'^get-all-industries/$', get_industries, name="company_data_detail"),
+  url(r'^management_level/listing$', ManagementLevelIndexView.as_view(), name="management_level_index"),
+  url(r'^management_level/detail/(?P<pk>\w+)$', ManagementLevelDetailView.as_view(), name="management_level_detail"),
+
 ]

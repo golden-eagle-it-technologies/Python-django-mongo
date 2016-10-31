@@ -8,6 +8,7 @@ import operator, re
 
 from companies.models import Company
 from industries.models import Industry
+from management_level.models import ManagementLevel
 
 pattern = re.compile('[\W_]+', re.UNICODE)
 
@@ -138,6 +139,12 @@ class User(Document):
     except:
       return None
 
+  @property
+  def management_level(self):
+      try:
+          return ManagementLevel.objects.get(keyword__icontains=self.latest_experience.title)
+      except:
+          return None
 
 class UserEmail(Document):
   meta = {"collection": "user_email"}

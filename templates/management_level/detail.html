@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+ <div class="row">
+      <div class="col-xs-6 col-md-4 ">
+        <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
+            <thead>
+              <tr>
+                <th>{{management_level.name}}
+                     <button type="button" class="btn btn-default pull-right" aria-label="Left Align">
+                      <a href="#">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </a>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right" aria-label="Left Align">
+                      <a href="#">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </a>
+                    </button>
+                    <button type="button" class="btn btn-default pull-right" aria-label="Left Align">
+                      <a href="#">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </a>
+                    </button>
+
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for keyword in management_level.keyword %}
+                    <tr>
+                      <td>{{ keyword }} <span></span></td>
+                    </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+ </div>
+{% endblock %}

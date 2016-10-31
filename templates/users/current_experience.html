@@ -13,6 +13,7 @@
         <th rowspan="2">Confidence</th>
         <th rowspan="2">Domain</th>
         <th rowspan="2">Current Job Title</th>
+        <th rowspan="2">Management Level</th>
         <th rowspan="2">Start Date</th>
         <th rowspan="2">End Date</th>
         <th colspan="2">Total Experience</th>
@@ -41,6 +42,7 @@
           <td>{{ user.user_email.confidence }}</td>
           <td><a href="http://{{ user.user_email.domain }}" target="_blank">{{ user.user_email.domain }}</a></td>
           <td>{{ user.latest_experience.title }}</td>
+          <td>{{ user.management_level.name }}</td>
           <td>{{ user.current_experience.start }}</td>
           {% if user.latest_experience.present %}
             <td>Present</td>

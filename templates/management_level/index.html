@@ -1,0 +1,36 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block top_nav %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Levels : <span class="tcount">{{ management_level.all.count }}</span></strong>
+      </span>
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-xs-6 col-md-4 ">
+        <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
+          <thead>
+            <tr>
+              <th>Management Levels</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for level in management_level %}
+              <tr>
+                <td><a href="/management_level/detail/{{level.pk}}" target="_blank">{{ level.name|title }}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+{% endblock %}
