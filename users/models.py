@@ -16,10 +16,21 @@ current_date = date.today()
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+class Department(Document):
+  meta = {"collection": "department"}
+  name = StringField(blank=True, null=True)
+
+
+  def __unicode__(self):
+    return self.title
+
+
+
 class Experience(Document):
   meta = {"collection": "new_experience"}
 
   company = ReferenceField(Company, blank=True, null=True)
+  department = ReferenceField(Company, blank=True, null=True)
   description = StringField(blank=True, null=True)
   duration_month = IntField(blank=True, null=True)
   duration_year = IntField(blank=True, null=True)
