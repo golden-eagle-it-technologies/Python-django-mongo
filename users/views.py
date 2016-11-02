@@ -6,7 +6,7 @@ from django_mongoengine.forms.fields import DictField
 from django_mongoengine.views import ListView, DetailView
 from datetime import datetime, date
 
-from users.models import User, Experience
+from users.models import *
 from companies.models import Company
 from raw_data.models import CompanyData, PeopleData
 from industries.models import Industry
@@ -141,4 +141,24 @@ class UserImproperDataView(ListView):
       object_list = self.document.objects(**{field : name}).filter(full_name='').order_by(sort)
     else:
       object_list = self.document.objects(full_name='').order_by(sort)
+    return object_list
+
+class UserDesignationView(ListView):
+  document = Designation
+  context_object_name = 'designations'
+  template_name = 'users/designation_listing.html'
+  paginate_by = 50
+
+  def get_queryset(self):
+    data = self.request.GET
+    
+    sort = data['sort'] if 'sort' in data else 'title'
+    name = data['search'] if 'search' in data else ''
+
+    if (name != ''):
+      field = data['filter']
+      field = field + '__icontains'
+      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+    else:
+      object_list = self.document.objects(title__ne='').order_by(sort)
     return object_list

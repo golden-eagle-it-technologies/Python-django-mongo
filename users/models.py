@@ -66,6 +66,15 @@ class Experience(Document):
       return {}
 
 
+class Designation(Document):
+  meta = {"collection": "designation"}
+
+  title = StringField(blank=True, null=True)
+  size = IntField(blank=True, null=True)
+  department = StringField(blank=True, null=True)
+  management_level = StringField(blank=True, null=True)
+
+
 class User(Document):
   meta = {"collection": "new_people"}
 

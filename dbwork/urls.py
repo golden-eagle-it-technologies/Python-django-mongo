@@ -14,6 +14,7 @@ urlpatterns = [
   url(r'^users/basic-listing/$', UserBasicListingView.as_view(), name="users_basic"),
   url(r'^users/experience-listing/$', UserExperienceListingView.as_view(), name="users_experience"),
   url(r'^users/current-experience-listing/$', UserCurrentExperiencesView.as_view(), name="users_current_experience"),
+  url(r'^users/designation-listing/$', UserDesignationView.as_view(), name="users_designation"),
   url(r'^users/improper-listing/$', UserImproperDataView.as_view(), name="users_improper_data"),
   url(r'^users/detail/(?P<user_id>\w+)$', get_user, name="user_detail"),
   url(r'^companies/listing/$', CompanyIndexView.as_view(), name="company_index"),
