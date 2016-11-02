@@ -58,6 +58,12 @@ $(document).ready(function(){
       $('#system-select').css('display','block');
       $('#system-select').val(decodeURIComponent(search.replace('+',' ')));
     }
+    if(filter=='updated'||filter=='last_visited')
+    {
+      $('.search-class').css('display','none');
+      $('#date-picker').css('display','block');
+      $('#date-picker').val(decodeURIComponent(search.replace('+',' ')));
+    }
   }
   if($('#search-field').val()!='' || filter != undefined)
   {
@@ -82,6 +88,11 @@ $(document).ready(function(){
     {
       $('.search-class').css('display','none');
       $('#system-select').css('display','block');
+    }
+    else if ($(this).val() == 'updated' || $(this).val() == 'last_visited')
+    {
+      $('.search-class').css('display','none');
+      $('#date-picker').css('display','block');   
     }
     else
     {

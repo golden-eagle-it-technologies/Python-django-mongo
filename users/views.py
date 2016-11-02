@@ -57,8 +57,14 @@ class UserIndexView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+      if(field=='updated' or field== 'last_visited'):
+        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
+        field_lte = field + '__lte'
+        field_gte = field + '__gte'
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+      else:
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
     else:
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
@@ -77,8 +83,14 @@ class UserBasicListingView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+      if(field=='updated' or field== 'last_visited'):
+        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
+        field_lte = field + '__lte'
+        field_gte = field + '__gte'
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+      else:
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
     else:
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
@@ -97,8 +109,14 @@ class UserExperienceListingView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+      if(field=='updated' or field== 'last_visited'):
+        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
+        field_lte = field + '__lte'
+        field_gte = field + '__gte'
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+      else:
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
     else:
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
@@ -117,8 +135,14 @@ class UserCurrentExperiencesView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+      if(field=='updated' or field== 'last_visited'):
+        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
+        field_lte = field + '__lte'
+        field_gte = field + '__gte'
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+      else:
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
     else:
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
@@ -137,8 +161,14 @@ class UserImproperDataView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name='').order_by(sort)
+      if(field=='updated' or field== 'last_visited'):
+        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
+        field_lte = field + '__lte'
+        field_gte = field + '__gte'
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name='').order_by(sort)
+      else:
+        field = field + '__icontains'
+        object_list = self.document.objects(**{field : name}).filter(full_name='').order_by(sort)
     else:
       object_list = self.document.objects(full_name='').order_by(sort)
     return object_list
