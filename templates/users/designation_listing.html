@@ -22,6 +22,11 @@
             <option value="management_level">Management Level</option>
           </select>
         </div>
+        <div class="form-group">
+          <input type="search" class="search-class form-control" id="search-field" placeholder="Type search text here">
+          <input type="hidden" value="" id="search-param" name="search">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>
         <button type="submit" class="btn btn-primary">Filter</button>
       </form>
     </div>
@@ -37,7 +42,7 @@
   </div>
 
   <div class="row">
-    <table class="table table-bordered" id="myTable">
+    <table class="table table-bordered" id="">
       <thead>
         <tr>
           <th>Title</th>
@@ -49,9 +54,9 @@
       <tbody>
         {% for designation in designations %}
           <tr>
-            <td><a href="#" target="_blank">{{ designation.title }}</a></td>
+            <td>{{ designation.title|title }}</td>
             <td>{{ designation.size }}</td>
-            <td>{{ designation.department }}</td>
+            <td><a href="#" class="department-edit" data-type="text" data-pk="{{ designation.id }}" data-url="/department/update/" data-name="department_name" data-title="Enter Department">{{ designation.department|title }}</a></td>
             <td>{{ designation.management_level }}</td>
           </tr>
         {% endfor %}

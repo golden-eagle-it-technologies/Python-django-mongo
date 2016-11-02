@@ -6,6 +6,7 @@
     {% bootstrap_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-editable.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
   </head>
 
@@ -86,7 +87,14 @@
     {% block js_footer %}
       <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/bootstrap-select.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/bootstrap-editable.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $.fn.editable.defaults.mode = 'popup';
+           $('.department-edit').editable();
+        });
+      </script>
     {% endblock %}
   </body>
 </html>

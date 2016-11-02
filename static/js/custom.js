@@ -30,9 +30,8 @@ $(document).ready(function(){
   if(search != undefined)
   {
     if(filter!='country' && filter!='is_system' && filter!='industry')
-      $('#search-field').val(decodeURIComponent(search.replace('+',' ')));
-
-    $('#search-param').val(decodeURIComponent(search.replace('+',' ')));
+      $('#search-field').val(decodeURIComponent(search.split('+').join(' ')));
+      $('#search-param').val(decodeURIComponent(search.split('+').join(' ')));
   }
   if(sort != undefined)
   {

@@ -187,8 +187,21 @@ class UserDesignationView(ListView):
 
     if (name != ''):
       field = data['filter']
-      field = field + '__icontains'
-      object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+      if(field=='size'):
+        field = field
+      else:
+        field = field + '__icontains'
+      object_list = self.document.objects(**{field : name}).filter(title__ne='').order_by(sort)
     else:
       object_list = self.document.objects(title__ne='').order_by(sort)
     return object_list
+
+@csrf_exempt
+def department_update(request):
+  if request.POST:
+    data = request.POST
+    designation = Designation.objects.get(id=data['pk'])
+    designation.department = data['value']
+    designation.save()
+    
+    return HttpResponse('Updated Successfully')

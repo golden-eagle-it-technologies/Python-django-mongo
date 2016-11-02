@@ -22,7 +22,7 @@ class Department(Document):
   name = StringField(blank=True, null=True)
 
   def __unicode__(self):
-    return self.title
+    return self.name
 
 
 class Experience(Document):
@@ -42,10 +42,10 @@ class Experience(Document):
   start_month = IntField(blank=True, null=True)
   start_year = IntField(blank=True, null=True)
   title = StringField(blank=True, null=True)
-  organization = StringField(blank=True, null=True)
+  organization = DictField(blank=True, null=True)
   company_unique_id = StringField(blank=True, null=True)
   company_name = StringField(blank=True, null=True)
-
+  user_id = ReferenceField('User',blank=True, null=True)
 
   def __unicode__(self):
     return self.title
@@ -73,6 +73,20 @@ class Designation(Document):
   size = IntField(blank=True, null=True)
   department = StringField(blank=True, null=True)
   management_level = StringField(blank=True, null=True)
+
+  def save(self,*args,**kwargs):
+    try:
+      department = Department.objects.get(name__iexact=self.department)
+    except:
+      department = Department.objects.create(name=self.department)
+
+    experiences = Experience.objects(title__iexact=self.title)
+
+    for experience in experiences:
+      experience.department = department
+      experience.save()
+    
+    super(Designation,self).save(*args,**kwargs)
 
 
 class User(Document):
