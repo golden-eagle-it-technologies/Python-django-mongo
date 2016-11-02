@@ -15,11 +15,19 @@ pattern = re.compile('[\W_]+', re.UNICODE)
 current_date = date.today()
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+class Department(Document):
+  meta = {"collection": "department"}
+  name = StringField(blank=True, null=True)
+
+
+  def __unicode__(self):
+    return self.title
 
 class Experience(Document):
   meta = {"collection": "new_experience"}
 
   company = ReferenceField(Company, blank=True, null=True)
+  department = ReferenceField(Department, blank=True, null=True)
   description = StringField(blank=True, null=True)
   duration_month = IntField(blank=True, null=True)
   duration_year = IntField(blank=True, null=True)
@@ -60,6 +68,7 @@ class User(Document):
   meta = {"collection": "new_people"}
 
   current_industry = ReferenceField(Industry, blank=True, null=True)
+  department = ReferenceField(Department, blank=True, null=True)
   canonical_url = StringField(blank=True, null=True)
   vanity_url = BooleanField(blank=True, null=True)
   experiences = ListField(ReferenceField(Experience), default=list, blank=True, null=True)
