@@ -1,0 +1,61 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <label>Sort By</label>
+          <select class="form-control inputstl" id="sortBy" name="sort">
+            <option value="title" selected>Title</option>
+            <option value="size">Size</option>
+            <option value="department">Department</option>
+            <option value="management_level">Management Level</option>
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="form-control inputstl" id="filterBy" name="filter">
+            <option value="title" selected>Title</option>
+            <option value="size">Size</option>
+            <option value="department">Department</option>
+            <option value="management_level">Management Level</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Records : <span class="tcount">{{ designations.all.count }}</span></strong>
+      </span>
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-bordered" id="myTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Size</th>
+          <th>Department</th>
+          <th>Management Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for designation in designations %}
+          <tr>
+            <td><a href="#" target="_blank">{{ designation.title }}</a></td>
+            <td>{{ designation.size }}</td>
+            <td>{{ designation.department }}</td>
+            <td>{{ designation.management_level }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
