@@ -15,13 +15,15 @@ pattern = re.compile('[\W_]+', re.UNICODE)
 current_date = date.today()
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
 class Department(Document):
   meta = {"collection": "department"}
-  name = StringField(blank=True, null=True)
 
+  name = StringField(blank=True, null=True)
 
   def __unicode__(self):
     return self.title
+
 
 class Experience(Document):
   meta = {"collection": "new_experience"}
@@ -154,6 +156,7 @@ class User(Document):
           return ManagementLevel.objects.get(keyword__icontains=self.latest_experience.title)
       except:
           return None
+
 
 class UserEmail(Document):
   meta = {"collection": "user_email"}
