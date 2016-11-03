@@ -74,7 +74,3 @@ def get_company(request, company_id=None):
     return render(request, 'companies/show.html', rdata)
   else:
     return redirect('/')
-
-def get_industries(request):
-  industries = Industry.objects.order_by('name')
-  return HttpResponse(industries.to_json())

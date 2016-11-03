@@ -108,7 +108,7 @@ $(document).ready(function(){
   function getIndustries()
   {
     $.ajax({
-            url: "/get-all-industries/",
+            url: "/industries/get-all-industries/",
             type: "get",
             success: function(response) {
                 var industriesHtml = '<option value="">Select Industry</option>';

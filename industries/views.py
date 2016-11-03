@@ -26,3 +26,6 @@ class IndustryIndexView(ListView):
       object_list = self.document.objects.order_by(sort)
     return object_list
 
+def get_industries(request):
+  industries = Industry.objects.order_by('name')
+  return HttpResponse(industries.to_json())
