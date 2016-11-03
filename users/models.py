@@ -96,7 +96,7 @@ class User(Document):
   department = ReferenceField(Department, blank=True, null=True)
   canonical_url = StringField(blank=True, null=True)
   vanity_url = BooleanField(blank=True, null=True)
-  experiences = ListField(ReferenceField(Experience), default=list, blank=True, null=True)
+  experiences = ListField(ReferenceField(Experience), blank=True, null=True)
   family_name = StringField(blank=True, null=True)
   full_name = StringField(blank=True, null=True)
   given_name = StringField(blank=True, null=True)
@@ -112,6 +112,22 @@ class User(Document):
   updated = DateTimeField(blank=True, null=True)
   url = StringField(blank=True, null=True)
   headline = StringField(blank=True, null=True)
+
+  meta = {
+        'indexes': [
+            'full_name',
+            'current_industry',
+            'department',
+            'canonical_url',
+            'experiences',
+            'locality',
+            'num_connections',
+            'headline',
+            'industry',
+        ],
+        'index_background': True,
+    }
+
 
   def __unicode__(self):
     return self.full_name
@@ -129,7 +145,7 @@ class User(Document):
 
   @property
   def current_experience(self):
-    if(self.experiences):
+    if self.experiences:
       count = len(self.experiences)
 
       ctx = {}

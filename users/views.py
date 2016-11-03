@@ -121,30 +121,30 @@ class UserExperienceListingView(ListView):
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
 
+
+
 class UserCurrentExperiencesView(ListView):
   document = User
   template_name = 'users/current_experience.html'
   context_object_name = 'users'
-  paginate_by = 50
+  paginate_by = 25
+
+  @staticmethod
+  def filters(data):
+    ctx = {"full_name__ne":'','experiences__not__size':0}
+    if data.get('search',False):
+      field = data['filter']
+      if field in ['updated','last_visited'] :
+        search_date = datetime.strptime(data.get('search'), "%Y-%m-%d").date()
+        ctx.update({field + '__lte':search_date})
+      else:
+        ctx.update({field + '__icontains':data.get('search')})
+    return ctx
 
   def get_queryset(self):
     data = self.request.GET
-    
-    sort = data['sort'] if 'sort' in data else 'full_name'
-    name = data['search'] if 'search' in data else ''
-
-    if (name != ''):
-      field = data['filter']
-      if(field=='updated' or field== 'last_visited'):
-        dateObject = datetime.strptime(name, "%Y-%m-%d").date()
-        field_lte = field + '__lte'
-        field_gte = field + '__gte'
-        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
-      else:
-        field = field + '__icontains'
-        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
-    else:
-      object_list = self.document.objects(full_name__ne='').order_by(sort)
+    filters = self.filters(data)
+    object_list = self.document.objects(**filters).order_by(data.get('sort','full_name'))
     return object_list
 
 class UserImproperDataView(ListView):
