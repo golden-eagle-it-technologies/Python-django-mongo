@@ -15,11 +15,14 @@ urlpatterns = [
   url(r'^users/basic-listing/$', UserBasicListingView.as_view(), name="users_basic"),
   url(r'^users/experience-listing/$', UserExperienceListingView.as_view(), name="users_experience"),
   url(r'^users/current-experience-listing/$', UserCurrentExperiencesView.as_view(), name="users_current_experience"),
-  url(r'^users/designation-listing/$', UserDesignationView.as_view(), name="users_designation"),
+  url(r'^users/designation-department-listing/$', UserDesignationView.as_view(), name="users_designation_department"),
+  url(r'^users/designation-department2-listing/$', UserDesignation2View.as_view(), name="users_designation_department2"),
   url(r'^users/improper-listing/$', UserImproperDataView.as_view(), name="users_improper_data"),
   url(r'^users/detail/(?P<user_id>\w+)$', get_user, name="user_detail"),
   url(r'^users/department/update/$', department_update, name="department_update"),
   url(r'^users/get/departments/$', get_departments, name="get_departments"),
+  url(r'^users/departments-listing/$', UserDepartmentView.as_view(), name="users_departments_listing"),
+  url(r'^users/departments/create/$', department_create, name="department_create"),
 
   url(r'^companies/listing/$', CompanyIndexView.as_view(), name="company_index"),
   url(r'^companies/detail/(?P<company_id>\w+)$', get_company, name="company_detail"),
@@ -36,6 +39,7 @@ urlpatterns = [
   
   url(r'^management_level/listing$', ManagementLevelIndexView.as_view(), name="management_level_index"),
   url(r'^management_level/detail/(?P<pk>\w+)$', ManagementLevelDetailView.as_view(), name="management_level_detail"),
-
-  
+  url(r'^management-level/designation-listing/$', ManagementLevelDesignationView.as_view(), name="management_level_designation_listing"),
+  url(r'^management-level/get-management-level/$', get_management_level_data, name="management_level_json"),
+  url(r'^management-level/designation-update/$', management_level_designation_update, name="management_level_designation_update"),
 ]

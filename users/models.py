@@ -76,20 +76,33 @@ class Designation(Document):
   department2 = StringField(blank=True, null=True)
   management_level = StringField(blank=True, null=True)
 
-  def save(self,*args,**kwargs):
-    try:
-      department = Department.objects.get(name__iexact=self.department)
-    except:
-      department = Department.objects.create(name=self.department)
+  # def save(self,*args,**kwargs):
+  #   department = Department.objects.get(name__iexact=self.department)
+  #   experiences = Experience.objects(title__iexact=self.title)
 
+  #   for experience in experiences:
+  #     experience.department = department
+  #     experience.save()
+    
+  #   super(Designation,self).save(*args,**kwargs)
+
+  def departmentUpdate(self):
+    department = Department.objects.get(name__iexact=self.department)
     experiences = Experience.objects(title__iexact=self.title)
-
+    
     for experience in experiences:
       experience.department = department
       experience.save()
-    
-    super(Designation,self).save(*args,**kwargs)
+    self.save()
 
+  def department2Update(self):
+    department = Department.objects.get(name__iexact=self.department)
+    experiences = Experience.objects(title__iexact=self.title)
+    
+    for experience in experiences:
+      experience.department2 = department
+      experience.save()
+    self.save()
 
 class User(Document):
   meta = {"collection": "new_people"}

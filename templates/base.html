@@ -57,13 +57,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data Cleansing <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{% url '#' %}">Department 1 Cleansing</a></li>
+                <li><a href="{% url 'users_designation_department' %}">Department 1 Cleansing</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{% url '#' %}">Department 2 Cleansing</a></li>
+                <li><a href="{% url 'users_designation_department2' %}">Department 2 Cleansing</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{% url '#' %}">Management Level Cleansing</a></li>
+                <li><a href="{% url 'management_level_designation_listing' %}">Management Level Cleansing</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{% url '#' %}">Add/Edit Department</a></li>
+                <li><a href="{% url 'users_departments_listing' %}">Add/Edit Department</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -99,14 +99,19 @@
       <script type="text/javascript">
         $(document).ready(function(){
           var sourceDepartments=[];
-
-
+          var sourceManagementArray=[];
           $.fn.editable.defaults.mode = 'popup';
           getDepartments();
+          getMangementLevel();
+          $('.department-name-edit').editable(
+          {
+            type:'text',
+          });
+
           function getDepartments()
           {
             $.ajax({
-                    url: "/get/departments/",
+                    url: "/users/get/departments/",
                     type: "get",
                     success: function(response) {
                        departmentArray = JSON.parse(response) 
@@ -118,6 +123,25 @@
                         {
                           type:'select',
                           source:sourceDepartments,
+                        });
+                    }
+                })
+          }
+          function getMangementLevel()
+          {
+            $.ajax({
+                    url: "/management-level/get-management-level/",
+                    type: "get",
+                    success: function(response) {
+                       managementArray = JSON.parse(response) 
+                       for(var i=0;i<managementArray.length;i++)
+                        {
+                          sourceManagementArray.push({'value':managementArray[i]._id.$oid , 'text':managementArray[i].name});
+                        }
+                        $('.management-edit').editable(
+                        {
+                          type:'select',
+                          source:sourceManagementArray,
                         });
                     }
                 })

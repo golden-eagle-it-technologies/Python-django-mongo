@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -174,7 +174,7 @@ class UserImproperDataView(ListView):
 class UserDesignationView(ListView):
   document = Designation
   context_object_name = 'designations'
-  template_name = 'users/designation_listing.html'
+  template_name = 'users/designation_department_listing.html'
   paginate_by = 50
 
   def get_queryset(self):
@@ -194,15 +194,64 @@ class UserDesignationView(ListView):
       object_list = self.document.objects(title__ne='').order_by(sort)
     return object_list
 
+class UserDesignation2View(ListView):
+  document = Designation
+  context_object_name = 'designations'
+  template_name = 'users/designation_department2_listing.html'
+  paginate_by = 50
+
+  def get_queryset(self):
+    data = self.request.GET
+    
+    sort = data['sort'] if 'sort' in data else 'title'
+    name = data['search'] if 'search' in data else ''
+
+    if (name != ''):
+      field = data['filter']
+      if(field=='size'):
+        field = field
+      else:
+        field = field + '__icontains'
+      object_list = self.document.objects(**{field : name}).filter(title__ne='').order_by(sort)
+    else:
+      object_list = self.document.objects(title__ne='').order_by(sort)
+    return object_list
+
+class UserDepartmentView(ListView):
+  document = Department
+  context_object_name = 'departments'
+  template_name = 'users/department_listing.html'
+  paginate_by = 50
+
+@csrf_exempt
+def department_create(request):
+  if request.POST:
+    data = request.POST
+    Department.objects.create(name=data['department_name'])
+    return HttpResponseRedirect('/users/departments-listing/')
+
 @csrf_exempt
 def department_update(request):
   if request.POST:
     data = request.POST
-    designation = Designation.objects.get(id=data['pk'])
-    designation.department = data['value']
-    designation.save()
-    
-    return HttpResponse('Updated Successfully')
+    if data['name'] == 'department_name':
+      department = Department.objects.get(id=data['pk'])
+      department.name = data['value']
+      department.save()
+
+    else:
+      designation = Designation.objects.get(id=data['pk'])
+      department = Department.objects.get(id=data['value'])
+      
+      if data['name'] == 'department1':
+        designation.department = department.name
+        designation.departmentUpdate()
+        
+      elif data['name'] == 'department2':
+        designation.department2 = department.name
+        designation.department2Update()
+      
+    return HttpResponse('Updated Successfully') 
 
 def get_departments(request):
   departments = Department.objects.order_by('name')

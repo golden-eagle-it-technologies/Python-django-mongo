@@ -1,0 +1,65 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline" id="search-form" action="">
+        <div class="form-group">
+          <label>Sort By</label>
+          <select class="form-control inputstl" id="sortBy" name="sort">
+            <option value="title" selected>Title</option>
+            <option value="size">Size</option>
+            <option value="management_level">Management Level</option>
+            <option value="-title" selected>Desc Title</option>
+            <option value="-size">Desc Size</option>
+            <option value="-management_level">Desc Management Level</option>
+          </select>
+        </div>
+        <label>Search By</label>
+        <div class="form-group">
+          <select class="form-control inputstl" id="filterBy" name="filter">
+            <option value="title" selected>Title</option>
+            <option value="size">Size</option>
+            <option value="management_level">Management Level</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="search" class="search-class form-control" id="search-field" placeholder="Type search text here">
+          <input type="hidden" value="" id="search-param" name="search">
+          <input type="hidden" id="page-no" value="1" name="page">
+        </div>
+        <button type="submit" class="btn btn-primary">Filter</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Records : <span class="tcount">{{ designations.all.count }}</span></strong>
+      </span>
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-bordered" id="">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Size</th>
+          <th>Management Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for designation in designations %}
+          <tr>
+            <td>{{ designation.title|title }}</td>
+            <td>{{ designation.size }}</td>
+            <td><a href="#" class="management-edit" data-pk="{{ designation.id }}" data-url="/management-level/designation-update/" data-name="management_level" data-title="Select Management Level">{{ designation.management_level|title }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

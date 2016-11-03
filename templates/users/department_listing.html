@@ -1,0 +1,42 @@
+{% extends "base.html" %}{% load bootstrap3 %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <span class="total-records">
+        <strong>Total Number of Departments : <span class="tcount">{{ departments.all.count }}</span></strong>
+      </span>
+      {% bootstrap_pagination page_obj %}
+    </div>
+  </div>
+  <div class="row" style="margin-bottom:2%;">
+    <div class="col-xs-6 col-md-4 ">
+      <form action="/users/departments/create/" method="POST" class="form-inline">
+        <div class="form-group">
+          <input type="text" name="department_name" class="form-control" placeholder="Enter Department Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-xs-6 col-md-4 ">
+        <table class="table table-bordered" style="height:auto; max-height:100%; overflow:auto;">
+          <thead>
+            <tr>
+              <th>Department</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for department in departments %}
+              <tr>
+                <td><a href="#" class="department-name-edit" data-pk="{{ department.id }}" data-url="/users/department/update/" data-name="department_name" data-title="Select Department">{{ department.name|title }}</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+{% endblock %}

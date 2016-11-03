@@ -10,11 +10,9 @@
             <option value="title" selected>Title</option>
             <option value="size">Size</option>
             <option value="department">Department</option>
-            <option value="management_level">Management Level</option>
             <option value="-title" selected>Desc Title</option>
             <option value="-size">Desc Size</option>
             <option value="-department">Desc Department</option>
-            <option value="-management_level">Desc Management Level</option>
           </select>
         </div>
         <label>Search By</label>
@@ -23,7 +21,6 @@
             <option value="title" selected>Title</option>
             <option value="size">Size</option>
             <option value="department">Department</option>
-            <option value="management_level">Management Level</option>
           </select>
         </div>
         <div class="form-group">
@@ -52,7 +49,6 @@
           <th>Title</th>
           <th>Size</th>
           <th>Department</th>
-          <th>Management Level</th>
         </tr>
       </thead>
       <tbody>
@@ -60,8 +56,7 @@
           <tr>
             <td>{{ designation.title|title }}</td>
             <td>{{ designation.size }}</td>
-            <td><a href="#" class="department-edit" data-type="text" data-pk="{{ designation.id }}" data-url="/users/department/update/" data-name="department_name" data-title="Enter Department">{{ designation.department|title }}</a></td>
-            <td>{{ designation.management_level }}</td>
+            <td><a href="#" class="department-edit" data-pk="{{ designation.id }}" data-url="/users/department/update/" data-name="department1" data-title="Select Department">{{ designation.department|title }}</a></td>
           </tr>
         {% endfor %}
       </tbody>
