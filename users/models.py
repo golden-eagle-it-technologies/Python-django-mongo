@@ -30,6 +30,7 @@ class Experience(Document):
 
   company = ReferenceField(Company, blank=True, null=True)
   department = ReferenceField(Department, blank=True, null=True)
+  department2 = ReferenceField(Department, blank=True, null=True)
   description = StringField(blank=True, null=True)
   duration_month = IntField(blank=True, null=True)
   duration_year = IntField(blank=True, null=True)
@@ -72,6 +73,7 @@ class Designation(Document):
   title = StringField(blank=True, null=True)
   size = IntField(blank=True, null=True)
   department = StringField(blank=True, null=True)
+  department2 = StringField(blank=True, null=True)
   management_level = StringField(blank=True, null=True)
 
   def save(self,*args,**kwargs):
@@ -113,20 +115,20 @@ class User(Document):
   url = StringField(blank=True, null=True)
   headline = StringField(blank=True, null=True)
 
-  meta = {
-        'indexes': [
-            'full_name',
-            'current_industry',
-            'department',
-            'canonical_url',
-            'experiences',
-            'locality',
-            'num_connections',
-            'headline',
-            'industry',
-        ],
-        'index_background': True,
-    }
+  # meta = {
+  #       'indexes': [
+  #           'full_name',
+  #           'current_industry',
+  #           'department',
+  #           'canonical_url',
+  #           'experiences',
+  #           'locality',
+  #           'num_connections',
+  #           'headline',
+  #           'industry',
+  #       ],
+  #       'index_background': True,
+  #   }
 
 
   def __unicode__(self):

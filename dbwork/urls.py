@@ -30,4 +30,5 @@ urlpatterns = [
   url(r'^management_level/listing$', ManagementLevelIndexView.as_view(), name="management_level_index"),
   url(r'^management_level/detail/(?P<pk>\w+)$', ManagementLevelDetailView.as_view(), name="management_level_detail"),
   url(r'^department/update/$', department_update, name="department_update"),
+  url(r'^get/departments/$', get_departments, name="get_departments"),
 ]

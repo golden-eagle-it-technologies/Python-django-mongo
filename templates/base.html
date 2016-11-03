@@ -91,8 +91,33 @@
       <script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
       <script type="text/javascript">
         $(document).ready(function(){
+          var sourceDepartments=[];
+
+
           $.fn.editable.defaults.mode = 'popup';
-           $('.department-edit').editable();
+          getDepartments();
+          function getDepartments()
+          {
+            $.ajax({
+                    url: "/get/departments/",
+                    type: "get",
+                    success: function(response) {
+                       departmentArray = JSON.parse(response) 
+                       for(var i=0;i<departmentArray.length;i++)
+                        {
+                          sourceDepartments.push({'value':departmentArray[i]._id.$oid , 'text':departmentArray[i].name});
+                        }
+                        $('.department-edit').editable(
+                        {
+                          type:'select',
+                          source:sourceDepartments,
+                        });
+                    }
+                })
+          }
+
+
+
         });
       </script>
     {% endblock %}

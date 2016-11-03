@@ -205,3 +205,7 @@ def department_update(request):
     designation.save()
     
     return HttpResponse('Updated Successfully')
+
+def get_departments(request):
+  departments = Department.objects.order_by('name')
+  return HttpResponse(departments.to_json())
