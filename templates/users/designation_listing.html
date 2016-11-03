@@ -60,7 +60,7 @@
           <tr>
             <td>{{ designation.title|title }}</td>
             <td>{{ designation.size }}</td>
-            <td><a href="#" class="department-edit" data-type="text" data-pk="{{ designation.id }}" data-url="/department/update/" data-name="department_name" data-title="Enter Department">{{ designation.department|title }}</a></td>
+            <td><a href="#" class="department-edit" data-type="text" data-pk="{{ designation.id }}" data-url="/users/department/update/" data-name="department_name" data-title="Enter Department">{{ designation.department|title }}</a></td>
             <td>{{ designation.management_level }}</td>
           </tr>
         {% endfor %}

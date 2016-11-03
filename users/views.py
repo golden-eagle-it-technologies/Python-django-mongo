@@ -121,8 +121,6 @@ class UserExperienceListingView(ListView):
       object_list = self.document.objects(full_name__ne='').order_by(sort)
     return object_list
 
-
-
 class UserCurrentExperiencesView(ListView):
   document = User
   template_name = 'users/current_experience.html'

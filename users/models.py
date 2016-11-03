@@ -130,7 +130,6 @@ class User(Document):
   #       'index_background': True,
   #   }
 
-
   def __unicode__(self):
     return self.full_name
 
