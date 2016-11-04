@@ -127,6 +127,8 @@ class User(Document):
   updated = DateTimeField(blank=True, null=True)
   url = StringField(blank=True, null=True)
   headline = StringField(blank=True, null=True)
+  is_proper = BooleanField(blank=True, null=True)
+  comment = StringField(blank=True, null=True)
 
   # meta = {
   #       'indexes': [

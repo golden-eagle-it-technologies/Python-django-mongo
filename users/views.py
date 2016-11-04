@@ -61,12 +61,12 @@ class UserIndexView(ListView):
         dateObject = datetime.strptime(name, "%Y-%m-%d").date()
         field_lte = field + '__lte'
         field_gte = field + '__gte'
-        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(is_proper=True).order_by(sort)
       else:
         field = field + '__icontains'
-        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field : name}).filter(is_proper=True).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__ne='').order_by(sort)
+      object_list = self.document.objects(is_proper=True).order_by(sort)
     return object_list
 
 class UserBasicListingView(ListView):
@@ -87,12 +87,12 @@ class UserBasicListingView(ListView):
         dateObject = datetime.strptime(name, "%Y-%m-%d").date()
         field_lte = field + '__lte'
         field_gte = field + '__gte'
-        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(is_proper=True).order_by(sort)
       else:
         field = field + '__icontains'
-        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field : name}).filter(is_proper=True).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__ne='').order_by(sort)
+      object_list = self.document.objects(is_proper=True).order_by(sort)
     return object_list
 
 class UserExperienceListingView(ListView):
@@ -113,12 +113,12 @@ class UserExperienceListingView(ListView):
         dateObject = datetime.strptime(name, "%Y-%m-%d").date()
         field_lte = field + '__lte'
         field_gte = field + '__gte'
-        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(is_proper=True).order_by(sort)
       else:
         field = field + '__icontains'
-        object_list = self.document.objects(**{field : name}).filter(full_name__ne='').order_by(sort)
+        object_list = self.document.objects(**{field : name}).filter(is_proper=True).order_by(sort)
     else:
-      object_list = self.document.objects(full_name__ne='').order_by(sort)
+      object_list = self.document.objects(is_proper=True).order_by(sort)
     return object_list
 
 class UserCurrentExperiencesView(ListView):
@@ -129,7 +129,7 @@ class UserCurrentExperiencesView(ListView):
 
   @staticmethod
   def filters(data):
-    ctx = {"full_name__ne":'','experiences__not__size':0}
+    ctx = {'is_proper':True}
     if data.get('search',False):
       field = data['filter']
       if field in ['updated','last_visited'] :
@@ -148,7 +148,7 @@ class UserCurrentExperiencesView(ListView):
 class UserImproperDataView(ListView):
   document = User
   context_object_name = 'users'
-  template_name = 'users/index.html'
+  template_name = 'users/improper_data_listing.html'
   paginate_by = 50
 
   def get_queryset(self):
@@ -163,12 +163,12 @@ class UserImproperDataView(ListView):
         dateObject = datetime.strptime(name, "%Y-%m-%d").date()
         field_lte = field + '__lte'
         field_gte = field + '__gte'
-        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(full_name='').order_by(sort)
+        object_list = self.document.objects(**{field_gte:datetime.combine(dateObject, datetime.min.time()),field_lte:datetime.combine(dateObject, datetime.max.time())}).filter(is_proper=False).order_by(sort)
       else:
         field = field + '__icontains'
-        object_list = self.document.objects(**{field : name}).filter(full_name='').order_by(sort)
+        object_list = self.document.objects(**{field : name}).filter(is_proper=False).order_by(sort)
     else:
-      object_list = self.document.objects(full_name='').order_by(sort)
+      object_list = self.document.objects(is_proper=False).order_by(sort)
     return object_list
 
 class UserDesignationView(ListView):
